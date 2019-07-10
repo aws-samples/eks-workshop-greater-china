@@ -1,2 +1,7 @@
-# eks-workshop-greater-china
+## Eks Workshop Greater China
+
 AWS Workshop for Learning EKS for Greater China
+
+## License Summary
+
+This sample code is made available under the MIT-0 license. See the LICENSE file.
