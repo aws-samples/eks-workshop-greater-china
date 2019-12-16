@@ -5,7 +5,7 @@
 
 ```bash
 #创建OIDC身份提供商 
-eksctl utils associate-iam-oidc-provider --name eksworkshop --approve
+eksctl utils associate-iam-oidc-provider --cluster eksworkshop --approve
 
 #创建serviceaccount s3-echoer with IAM role
 eksctl create iamserviceaccount --name s3-echoer --cluster eksworkshop --attach-policy-arn arn:aws:iam::aws:policy/AmazonS3FullAccess --approve
