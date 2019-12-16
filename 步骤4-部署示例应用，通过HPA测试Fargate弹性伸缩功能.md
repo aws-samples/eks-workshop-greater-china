@@ -73,7 +73,7 @@ watch kubectl get hpa -n dev
 watch kubectl get nodes
 ```
 
-> Fargate 实例数据会自动根据HPA的策略，副本数增加而自动扩展
+> Fargate 实例数会自动根据HPA的策略，副本数增加而自动扩展
 
 ![](media/15764769332543/1576503956.png)
 
