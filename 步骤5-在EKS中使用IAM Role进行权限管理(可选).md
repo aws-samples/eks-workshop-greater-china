@@ -20,7 +20,7 @@ eksctl create iamserviceaccount --name s3-echoer --cluster eksworkshop --attach-
 git clone https://github.com/mhausenblas/s3-echoer.git && cd s3-echoer
 
 #请替换<user_name> 
-TARGET_BUCKET= <user_name>-irsa-2019
+TARGET_BUCKET=<user_name>-irsa-2019
 
 aws s3api create-bucket  --bucket $TARGET_BUCKET  --create-bucket-configuration LocationConstraint=$AWS_DEFAULT_REGION  --region $AWS_DEFAULT_REGION
 
