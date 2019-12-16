@@ -1,6 +1,6 @@
 # 步骤2: 设置默认region, 安装eksctl, kubectl工具
 
-我们将在步骤1创建的AWS Cloud9 环境里面安全eksctl,kubectl jq等Lab所需要的工具。进入Cloud9编辑器环境后，在终端中输入以下命令,分别安装 eksctl(版本>=0.11.1), kubectl(版本>=1.14)
+我们将在步骤1创建的AWS Cloud9 环境里面安装eksctl,kubectl。进入Cloud9编辑器环境后，在终端中输入以下命令,进行安装。
 
 ```bash
 #设置默认region
@@ -16,4 +16,11 @@ curl -LO --silent https://storage.googleapis.com/kubernetes-release/release/`cur
 chmod 775 ./kubectl
 sudo mv ./kubectl /usr/local/bin
 
+```
+
+>检查工具的版本 eksctl (版本>=0.11.1), kubectl(版本>=1.14)
+
+```bash
+eksctl version
+kubectl version
 ```
