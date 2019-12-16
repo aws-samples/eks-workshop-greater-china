@@ -70,7 +70,7 @@ spec:
  ```
 
 3.3 使用eksctl创建fargateprofile
-   我们将会创建一个fargateprofile,并且将namespace参数设置为dev, 这样之后所有在dev部署的deployment、pod就会使用fargatefu实例运行了。
+   我们将会创建一个fargateprofile,并且将namespace参数设置为dev, 这样之后所有在dev部署的deployment、pod就会使用Fargate实例运行了。
 
 ```bash
 
