@@ -29,7 +29,7 @@ kubectl get apiservice v1beta1.metrics.k8s.io -o yaml
 4.2 部署实例应用 php-apache,并设置HPA cpu 50%开始自动扩展,最大扩展10个replicas
 
 ```bash
-#部署HPA实例应用
+#部署HPA示例应用
 kubectl run php-apache --image=k8s.gcr.io/hpa-example --requests=cpu=200m --expose --port=80 --namespace dev
 
 #设置CPU50%进行扩展,最大扩展为10个副本
