@@ -1,4 +1,4 @@
-## Eks Workshop Greater China
+## EKS Workshop Greater China
 
 AWS Workshop for Learning EKS for Greater China
 
