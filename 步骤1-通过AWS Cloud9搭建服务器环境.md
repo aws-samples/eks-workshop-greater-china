@@ -1,0 +1,49 @@
+# 步骤1: 通过AWS Cloud9搭建服务器环境
+AWS Cloud9 为您提供了EC2基础设施资源并且一个可视化的编辑器。在本次实验中，您将通过Cloud9去创建一台具有公网访问权限的EC2 实例，运行后续的实验。
+
+1.1 打开AWS管理控制台，在Service菜单栏中输入关键字Cloud9创建一个进入Cloud9 管理页面。
+  ![](media/15764751257913/15764752078709.jpg)
+
+1.2 点击Create environment,在Environment name and Description内输入 环境的名称 <username>_cloud9，点击 Next Step。
+![](media/15764751257913/15764752501954.jpg)
+
+1.3 保持界面上的默认配置，本次实验不需要改动任何实例环境和网路环境， 点击 Next step。
+   ![](media/15764751257913/15764752786196.jpg)
+
+1.4 进入Review界面后，确认无误，点击Create Environment完成创建。此 后界面会跳转到 Cloud9 的编辑器页面。
+![](media/15764751257913/15764753072137.jpg)
+ 
+1.5	Cloud9 通常动态生成 IAM 的认证授权信息，但目前和 EKS IAM Authentication 不兼容，因此我们直接给 Cloud 9 EC2 实例附加一个管理员权限的 IAM 角色，并禁止掉 Cloud9 默认的动态 IAM认证授权信息：
+
+* 1）	创建 IAM 角色, (1) 第一步选择 AWS service 并选择 EC2 （2）权限中选择 AdministratorAccess （3）输入角色名字 eksworkshop-admin
+
+![](media/15764751257913/15764753507358.jpg)
+
+* 2)	在EC2 Instances界面讲eksworkshop-admin角色版定在cloud9的EC2实例上(名字为aws-cloud9-xxxxx)
+
+  ![](media/15764751257913/15764753825478.jpg)
+>   选择eksworkshop-admin 角色
+
+![](media/15764751257913/15764754031465.jpg)
+
+* 3)	关闭cloud9临时权限，并验证.
+
+![](media/15764751257913/15764754231502.jpg)
+
+输入:
+
+```bash
+#测试role是否生效
+aws sts get-caller-identit
+```
+如果可以正常返回以下内容(包含eksworkshop-admin),则表示已经正确设置角色权限
+```json
+{
+    "Account": "<your account id, etc.11111111>", 
+    "UserId": "AROAYVRRQ4TUEIX4VRZLN:i-0e011f5bb16f38173", 
+    "Arn": "arn:aws:sts:: <your account id, etc.11111111>:assumed-role/eksworkshop-admin/i-0e011f5bb16f38173"
+}
+```
+
+
+
