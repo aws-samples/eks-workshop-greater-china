@@ -34,7 +34,7 @@ AWS Cloud9 为您提供了EC2基础设施资源并且一个可视化的编辑器
 
 ```bash
 #测试role是否生效
-aws sts get-caller-identit
+aws sts get-caller-identity
 ```
 如果可以正常返回以下内容(包含eksworkshop-admin),则表示已经正确设置角色权限
 ```json
