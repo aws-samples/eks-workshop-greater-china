@@ -1,5 +1,5 @@
 #  步骤4: 部署示例应用，通过HPA测试Fargate弹性伸缩功能
-我们将要部署Metrisc Server,部署标准HPA实例程序hpa-example ，并通过Horizontal Pod Autoscaler (HPA)设置CPU 50%自动扩展策略,测试Fargate弹性伸缩功能。 
+我们将要部署Metrics Server,部署标准HPA实例程序hpa-example ，并通过Horizontal Pod Autoscaler (HPA)设置CPU 50%自动扩展策略,测试Fargate弹性伸缩功能。 
 
 **本节所有操作均部署在namespace dev*
 
