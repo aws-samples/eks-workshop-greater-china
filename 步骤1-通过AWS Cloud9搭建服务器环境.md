@@ -1,3 +1,6 @@
+# 进入实验环境
+
+通过浏览器进入 https://dashboard.eventengine.run/ ,填入12位code
 # 步骤1: 通过AWS Cloud9搭建服务器环境
 AWS Cloud9 为您提供了EC2基础设施资源并且一个可视化的编辑器。在本次实验中，您将通过Cloud9去创建一台具有公网访问权限的EC2 实例，运行后续的实验。
 
