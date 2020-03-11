@@ -1,10 +1,10 @@
-##AWS GCR EKS Workshop 
+## AWS GCR EKS Workshop 
 
-####China Region
+#### China Region
 ***
 AWS GCR 2020 EKS Launch Hands-on Workshop
 
-####Global Region
+#### Global Region
 ***
 
 AWS GCR 2019 EKS New Feature Workshop 
