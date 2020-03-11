@@ -1,4 +1,4 @@
-# AWS EKS  Hands-On Workshop (China Region)教程
+# AWS EKS China Region Launch Hands-on Workshop 
 * 概要
     在本练习中，您将学习如何使用创建、管理AWS EKS平台，并学会如何在EKS中创建集群并使用使用托管节点组/非托管节点组，在实验中我们还会学习到如何Kubernets 如何与Amazon IAM一起进行权限管理, 如何使用Horizental Pod Autoscaler (HPA)进行Pod的自动扩展，等等常见EKS操作。
     
@@ -25,3 +25,6 @@
     
     ```
  
+ contributions
+ * [stevensu1977](https://github.com/stevensu1977) 
+ * [liangruibupt ](https://github.com/liangruibupt)
