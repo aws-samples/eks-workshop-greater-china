@@ -4,7 +4,7 @@
 ***
 AWS GCR 2020 EKS Launch Hands-on Workshop
 -   [介绍](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_Lanuch_Workshop/README.md)
--   [步骤1-准备实验环境.md](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_Lanuch_Workshop/)
+-   [步骤1-准备实验环境.md](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_Lanuch_Workshop/步骤1-准备实验环境.md)
 
 #### Global Region
 ***
