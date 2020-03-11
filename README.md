@@ -3,19 +3,19 @@
 #### China Region
 ***
 AWS GCR 2020 EKS Launch Hands-on Workshop
-
+(持续更新中....)
 -   [介绍](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_Lanuch_Workshop/README.md)
 -   [步骤1-准备实验环境](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_Lanuch_Workshop/步骤1-准备实验环境.md)
 -   [步骤2-创建EKS集群](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_Lanuch_Workshop/步骤2-创建EKS集群.md)
--   [步骤3-部署官方的KubernetesDashboard](步骤3-部署官方的KubernetesDashboard.md)
--   [步骤4-部署微服务以及配置ALBIngressController](步骤4-部署微服务以及配置ALBIngressController.md) 
--   [步骤5-配置使用EBS](步骤5-配置使用EBS.md)
--   [步骤6-配置使用EFS](步骤6-配置使用EFS.md)
--   [步骤7-在EKS中使用IAMRole进行权限管理](步骤7-在EKS中使用IAMRole进行权限管理.md)
--   [步骤8-对应用Pod和集群进行自动扩展](步骤8-对应用Pod和集群进行自动扩展.md)
--   [步骤9-使用Helm部署应用](步骤9-使用Helm部署应用.md)
--   [步骤10-可用性-健康检查](步骤10-可用性-健康检查.md)
--   [步骤11-使用Calio加固EKS集群安全](步骤11-使用Calio加固EKS集群安全.md)
+-   [步骤3-部署官方的KubernetesDashboard](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_Lanuch_Workshop/步骤3-部署官方的KubernetesDashboard.md)
+-   [步骤4-部署微服务以及配置ALBIngressController](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_Lanuch_Workshop/步骤4-部署微服务以及配置ALBIngressController.md) 
+-   [步骤5-配置使用EBS](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_Lanuch_Workshop/步骤5-配置使用EBS.md)
+-   [步骤6-配置使用EFS](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_Lanuch_Workshop/步骤6-配置使用EFS.md)
+-   [步骤7-在EKS中使用IAMRole进行权限管理](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_Lanuch_Workshop/步骤7-在EKS中使用IAMRole进行权限管理.md)
+-   [步骤8-对应用Pod和集群进行自动扩展](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_Lanuch_Workshop/步骤8-对应用Pod和集群进行自动扩展.md)
+-   [步骤9-使用Helm部署应用](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_Lanuch_Workshop/步骤9-使用Helm部署应用.md)
+-   [步骤10-可用性-健康检查](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_Lanuch_Workshop/步骤10-可用性-健康检查.md)
+-   [步骤11-使用Calio加固EKS集群安全](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_Lanuch_Workshop/步骤11-使用Calio加固EKS集群安全.md)
 
 #### Global Region
 ***
