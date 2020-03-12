@@ -127,7 +127,7 @@ eksctl create iamserviceaccount \
        --approve
 
 参考输出
-[ℹ]  eksctl version 0.15.0-rc.1
+[ℹ]  eksctl version 0.15.0-rc.2
 [ℹ]  using region cn-northwest-1
 [ℹ]  1 iamserviceaccount (kube-system/alb-ingress-controller) was included (based on the include/exclude rules)
 [!]  metadata of serviceaccounts that exist in Kubernetes will be updated, as --override-existing-serviceaccounts was set
@@ -137,21 +137,6 @@ eksctl create iamserviceaccount \
 [ℹ]  created serviceaccount "kube-system/alb-ingress-controller"
 ```
 
-> 4.2.1.4 (可选）eksctl 0.15-rc.0 已知issue 处理
-https://github.com/weaveworks/eksctl/issues/1871, 需要手动修复。eksctl 0.15-rc.1已经修复这个问题
-
-在IAM找到eksctl创建的role , 关键词iamserviceaccount
-
-![](media/15832934698484/15833075255425.jpg)
-
-选择Trust relationship, 点击Edit trust relationship
-
-![](media/15832934698484/15833076008289.jpg)
-
-将"Federated":"arn:aws:iam::"
-修改为: "Federated": "arn:aws-cn:iam::"
-
-![](media/15832934698484/15833076362581.jpg)
 
  
 4.3 部署 ALB Ingress Controller
@@ -182,7 +167,7 @@ https://github.com/weaveworks/eksctl/issues/1871, 需要手动修复。eksctl 0.
     
   #使用修改好的yaml文件部署ALB Ingress Controller
  kubectl apply -f ./resource/alb-ingress-controller/alb-ingress-controller.yaml
-  
+
  
  #确认ALB Ingress Controller是否工作
  kubectl logs -n kube-system $(kubectl get po -n kube-system | egrep -o alb-ingress[a-zA-Z0-9-]+)
@@ -195,7 +180,7 @@ https://github.com/weaveworks/eksctl/issues/1871, 需要手动修复。eksctl 0.
   Repository: https://github.com/kubernetes-sigs/aws-alb-ingress-controller.git
 -------------------------------------------------------------------------------
 
- ```
+  ```
 
 
  4.4 使用ALB Ingress   
