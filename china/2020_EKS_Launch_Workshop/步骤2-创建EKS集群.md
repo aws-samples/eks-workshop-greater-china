@@ -84,10 +84,10 @@ export STACK_NAME=${STACK_NAME}
 2.2 部署一个nginx测试eks集群基本功能
 
 > 下载本git repository, 参考 resource/nginx-app目录的nginx-nlb.yaml, 创建一个nginx pod，并通过LoadBalancer类型对外暴露
+ *特别提醒80/443 在AWS China Region需要完成备案流程，请联系你的商业经理确保已开通，或者自行更改nginx-nlb.yaml的端口
 
 ```bash
-
-kubectl apply -f resource/nginx-nlb.yaml 
+kubectl apply -f resource/nginx-app/nginx-nlb.yaml 
 
 ## Check deployment status
 kubectl get pods
