@@ -8,7 +8,7 @@ AWS GCR 2020 EKS Launch Hands-on Workshop
 -   [步骤1-准备实验环境](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_Launch_Workshop/步骤1-准备实验环境.md)
 -   [步骤2-创建EKS集群](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_Launch_Workshop/步骤2-创建EKS集群.md)
 -   [步骤3-部署官方的KubernetesDashboard](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_Launch_Workshop/步骤3-部署官方的KubernetesDashboard.md)
--   [步骤4-部署微服务以及配置ALBIngressController](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_LaunchLaunch_Workshop/步骤4-部署微服务以及配置ALBIngressController.md) 
+-   [步骤4-部署微服务以及配置ALBIngressController](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_Launch_Workshop/步骤4-部署微服务以及配置ALBIngressController.md) 
 -   [步骤5-配置使用EBS](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_Launch_Workshop/步骤5-配置使用EBS.md)
 -   [步骤6-配置使用EFS](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_Launch_Workshop/步骤6-配置使用EFS.md)
 -   [步骤7-在EKS中使用IAMRole进行权限管理](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_Launch_Workshop/步骤7-在EKS中使用IAMRole进行权限管理.md)
