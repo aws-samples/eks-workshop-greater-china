@@ -9,7 +9,7 @@ aws ec2 create-security-group --description ${CLUSTER_NAME}-efs-eks-sg --group-n
 SGGroupID=上一步的结果访问
 aws ec2 authorize-security-group-ingress --group-id ${SGGroupID}  --protocol tcp --port 2049 --cidr ${VPC_CIDR}
 
-# 创建EFS file system 和 mount-target
+# 创建EFS file system 和 mount-target, 请根据你的环境替换 FileSystemId， SubnetID， SGGroupID
 aws efs create-file-system --creation-token eks-efs --region ${AWS_REGION}
 aws efs create-mount-target --file-system-id FileSystemId --subnet-id SubnetID --security-group SGGroupID
 
