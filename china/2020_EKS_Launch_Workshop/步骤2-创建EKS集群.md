@@ -133,15 +133,22 @@ ip-192-168-86-36.cn-northwest-1.compute.internal    Ready    <none>   3d4h   v1.
 
 由于防火墙或安全限制，海外gcr.io, quay.io的镜像可能无法下载，为了不手动修改原始yaml文件的镜像路径，采用下面webhook的方式，自动修改国内配置的镜像路径。
 详情参考 [amazon-api-gateway-mutating-webhook-for-k8](https://github.com/aws-samples/amazon-api-gateway-mutating-webhook-for-k8)
+1. 修改 api-gateway.yaml 中 image_mirrors 下面的镜像地址为你偏好的国内镜像地址
 ```bash
 git clone git@github.com:aws-samples/amazon-api-gateway-mutating-webhook-for-k8.git
 cd amazon-api-gateway-mutating-webhook-for-k8
-Deploy cloudformation api-gateway.yaml，注意修改下面的镜像地址为你偏好的地址
+# 
 image_mirrors = {
             'gcr.io/': 'local-gcr-io/',
             'k8s.gcr.io/': 'local-gcr-io/google-containers/',
             'quay.io/': 'local-quay-io/'
 }
+```
+
+2. 在AWS console 部署 Cloudformation template api-gateway.yaml 
+
+3. Cloudformation 部署完成之后，在 EKS 集群部署 webhook
+```bash
 kubectl apply -f mutating-webhook.yaml
 ```
 
