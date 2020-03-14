@@ -16,5 +16,8 @@ http://localhost:8080//api/v1/namespaces/kube-system/services/https:kubernetes-d
 
 #获取登录的token
 aws eks get-token --cluster-name ${CLUSTER_NAME} --region ${AWS_REGION} | jq -r '.status.token'
+
+#登录
+选择 Dashbaord 登录页面的 “Token” 单选按钮，复制上述命令的输出，粘贴，之后点击 Sign In。
 ```
 
