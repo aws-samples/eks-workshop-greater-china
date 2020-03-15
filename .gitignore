@@ -1,0 +1,9 @@
+.DS_Store
+china/.DS_Store
+global/.DS_Store
+resource/china/ecsdemo-crystal
+resource/china/ecsdemo-frontend
+resource/china/ecsdemo-nodejs
+resource/china/s3-echoer
+resource/china/hpa/metrics-server-v0.3.6.tar.gz
+resource/china/hpa/metrics-server-v0.3.6/*

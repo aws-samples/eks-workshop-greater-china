@@ -60,10 +60,7 @@ kubectl delete job/s3-echoer
 
 7.3 部署第二个测试应用
 ```bash
-# download pod yaml
-curl -LO https://eksworkshop.com/beginner/110_irsa/deploy.files/iam-pod.yaml
-# replace the serviceAccountName: s3-echoer
-# add the env AWS_DEFAULT_REGION or AWS_REGION to resolve issue: An error occurred (InvalidIdentityToken) when calling the AssumeRoleWithWebIdentity operation: No OpenIDConnect provider found in your account for
+cd china/2020_EKS_Launch_Workshop/resource/IRSA
 
 # Apply the testing
 kubectl apply -f iam-pod.yaml

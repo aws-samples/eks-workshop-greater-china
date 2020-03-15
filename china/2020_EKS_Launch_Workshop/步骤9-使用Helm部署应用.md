@@ -46,7 +46,7 @@ helm version --short
 # 设置 stable repository
 ## 删除默认的源
 helm repo remove stable
-## 增加新的国内镜像源
+## 增加新的国内镜像源, 你可以选择其他偏好的国内镜像
 helm repo add stable https://burdenbear.github.io/kube-charts-mirror/
 helm search repo wordpress
 
@@ -84,7 +84,7 @@ kubectl get pods -l app.kubernetes.io/name=nginx
 
 # Get the NGINX URL:
 #Watch the status with
-kubectl get svc --n default -w gcr-eks-webserver-nginx
+kubectl get svc -n default -w gcr-eks-webserver-nginx
 SERVICE_IP=$(kubectl get svc --namespace default gcr-eks-webserver-nginx --template "{{ range (index .status.loadBalancer.ingress 0) }}{{.}}{{ end }}")
 echo "NGINX URL: http://${SERVICE_IP}/"
 curl ${SERVICE_IP}
