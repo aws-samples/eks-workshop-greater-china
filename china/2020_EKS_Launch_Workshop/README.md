@@ -22,9 +22,6 @@
     
     ```bash
     git clone https://github.com/aws-samples/eks-workshop-greater-china.git
-    
     ```
- 
- contributions
- * [stevensu1977](https://github.com/stevensu1977) 
- * [liangruibupt ](https://github.com/liangruibupt)
+  **重要说明:** 本实验中使用到的gcr.io/k8s.gcr.io, quay.io镜像如果国内无法直接访问,请使用第三方image镜像或者个人dockerhub仓库,(可参考2.4 中国区镜像处理章节配置自动修改模式或者在实验中自行编辑对应的yaml文件).
+
