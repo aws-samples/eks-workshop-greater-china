@@ -9,9 +9,9 @@
 
 ```bash
 # 在步骤3我们已经创建了OIDC身份提供商 
-# 请检查IAM Open ID Connect provider已经创建
+# 请检查IAM OpenID Connect (OIDC) 身份提供商是否已经创建
 aws eks describe-cluster --name ${CLUSTER_NAME} --region ${AWS_REGION} --query cluster.identity.oidc.issuer --output text
-# 如果上述命令无输出，run below command to create one
+# 如果上述命令无输出，请执行以下命令创建OpenID Connect (OIDC) 身份提供商
 eksctl utils associate-iam-oidc-provider --cluster=${CLUSTER_NAME} --approve --region ${AWS_REGION}
 
 #创建serviceaccount s3-echoer with IAM role
@@ -22,12 +22,12 @@ eksctl create iamserviceaccount --name s3-echoer --namespace default \
 ```
 
 7.2 部署测试访问S3的应用
-*请确保bucket名字唯一,s3 bucket才能创建成功
+*使用已有s3 bucket或创建s3 bucket, 请确保bucket名字唯一才能创建成功.
 
 ```bash
 git clone https://github.com/mhausenblas/s3-echoer.git && cd s3-echoer
 
-# 准备S3 bucket
+# 设置环境变量TARGET_BUCKET,Pod访问的S3 bucket
 TARGET_BUCKET=eksworkshop-irsa-2019
 if [ $(aws s3 ls | grep $TARGET_BUCKET | wc -l) -eq 0 ]; then
     aws s3api create-bucket  --bucket $TARGET_BUCKET  --create-bucket-configuration LocationConstraint=$AWS_REGION  --region $AWS_REGION
@@ -58,20 +58,20 @@ aws s3api list-objects --bucket $TARGET_BUCKET --query 'Contents[].{Key: Key, Si
 kubectl delete job/s3-echoer
 ```
 
-7.3 部署第二个测试应用
+7.3 部署第二个IAM 权限测试Pod
 ```bash
-cd china/2020_EKS_Launch_Workshop/resource/IRSA
+cd china/2020_EKS_Launch_Workshop/resource/
 
 # Apply the testing
-kubectl apply -f iam-pod.yaml
-deployment.apps/eks-iam-test created
+kubectl apply -f IRSA/iam-pod.yaml
+pod/s3-echoer created created
 
-kubectl get pod -l app=eks-iam-test
+kubectl get pod  s3-echoer
 NAME                            READY   STATUS    RESTARTS   AGE
-eks-iam-test-76cfbb6fdc-qqn7m   1/1     Running   0          85s
+s3-echoer                       1/1     Running   0          2m38s
 
-# verify the sa work
-kubectl exec -it <place Pod Name> /bin/bash
+# 验证IAM Role 是否生效
+kubectl exec -it s3-echoer bash
 # In promote input, the output Arn should looks like assumed-role/eksctl-gcr-zhy-eksworkshop-addon-iamservicea-Role
 aws sts get-caller-identity
 # output shoudld list all the S3 bucket in AWS_REGION under the account 
@@ -80,6 +80,6 @@ aws ec2 describe-instances
 # output should be like: An error occurred (UnauthorizedOperation) when calling the DescribeInstances operation: You are not authorized to perform this operation.
 
 # cleanup
-kubectl delete -f iam-pod.yaml
+kubectl delete -f IRSA/iam-pod.yaml
 
 ```
