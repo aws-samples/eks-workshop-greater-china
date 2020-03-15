@@ -28,6 +28,11 @@ AWS GCR 2019 EKS New Feature Workshop
 -   [步骤4: 部署示例应用，通过HPA测试Fargate弹性伸缩功能](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/global/2019_GCR_EKS_Workshop/%E6%AD%A5%E9%AA%A44-%E9%83%A8%E7%BD%B2%E7%A4%BA%E4%BE%8B%E5%BA%94%E7%94%A8%EF%BC%8C%E9%80%9A%E8%BF%87HPA%E6%B5%8B%E8%AF%95Fargate%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9%E5%8A%9F%E8%83%BD.md)
 -   [步骤5: 在EKS中使用IAM Role进行权限管理](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/global/2019_GCR_EKS_Workshop/%E6%AD%A5%E9%AA%A45-%E5%9C%A8EKS%E4%B8%AD%E4%BD%BF%E7%94%A8IAM%20Role%E8%BF%9B%E8%A1%8C%E6%9D%83%E9%99%90%E7%AE%A1%E7%90%86(%E5%8F%AF%E9%80%89).md)
 
+## Resource
+- [Amazon EKS 入门](https://docs.aws.amazon.com/zh_cn/eks/latest/userguide/getting-started.html)
+- [eksworkshop.com](https://eksworkshop.com/)
+- [eksctl doc](https://eksctl.io/)
+
 ## License Summary
 
 This sample code is made available under the MIT-0 license. See the LICENSE file.
