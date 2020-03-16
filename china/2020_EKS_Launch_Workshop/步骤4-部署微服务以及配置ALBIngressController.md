@@ -187,8 +187,8 @@ eksctl create iamserviceaccount \
 >4.4.1 为nginx service创建ingress
 
 ```bash
-cd resource/alb-ingress-controller
-kubectl apply -f nginx-alb-ingress.yaml
+cd china/2020_EKS_Launch_Workshop/resource/
+kubectl apply -f ./alb-ingress-controller/nginx-alb-ingress.yaml
 ```
 
 >4.4.2 验证
@@ -203,7 +203,7 @@ kubectl logs -n kube-system $(kubectl get po -n kube-system | egrep -o alb-ingre
 
 > 4.4.3 清理
 ```bash
-kubectl delete -f nginx-alb-ingress.yaml
+kubectl apply -f ./alb-ingress-controller/nginx-alb-ingress.yaml
 ```
 
 4.5 使用ALB Ingress，部署2048 game (可选）
