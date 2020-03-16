@@ -203,7 +203,7 @@ kubectl logs -n kube-system $(kubectl get po -n kube-system | egrep -o alb-ingre
 
 > 4.4.3 清理
 ```bash
-kubectl apply -f ./alb-ingress-controller/nginx-alb-ingress.yaml
+kubectl delete -f ./alb-ingress-controller/nginx-alb-ingress.yaml
 ```
 
 4.5 使用ALB Ingress，部署2048 game (可选）
