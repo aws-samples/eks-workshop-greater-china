@@ -146,7 +146,7 @@ eksctl create iamserviceaccount \
  >4.3.1 创建 ALB Ingress Controller 所需要的RBAC
  
  ```bash
- kubectl apply -f resource ./resource/alb-ingress-controller/rbac-role.yaml
+ kubectl apply -f ./resource/alb-ingress-controller/rbac-role.yaml
  
  ```
 
