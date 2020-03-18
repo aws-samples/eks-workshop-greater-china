@@ -108,7 +108,7 @@ eksctl utils associate-iam-oidc-provider --cluster=${CLUSTER_NAME} --approve --r
 ```bash
 cd china/2020_EKS_Launch_Workshop
 aws iam create-policy --policy-name ALBIngressControllerIAMPolicy \
-  --policy-document file://./resource/alb-ingress-controller/ingress-iam-policy.json --region ${AWS_REGION}
+  --policy-document file://./alb-ingress-controller/ingress-iam-policy.json --region ${AWS_REGION}
 
 # 记录返回的Plociy ARN
 POLICY_NAME=$(aws iam list-policies --query 'Policies[?PolicyName==`ALBIngressControllerIAMPolicy`].Arn' --output text --region ${AWS_REGION})
@@ -138,15 +138,15 @@ eksctl create iamserviceaccount \
 ```
 
 
- 
+
 4.3 部署 ALB Ingress Controller
 
  相关文件已经resource/alb-ingress-controller目录下，并且修改好，下面步骤为你全新Step-by-Step操作
 
  >4.3.1 创建 ALB Ingress Controller 所需要的RBAC
- 
+
  ```bash
- kubectl apply -f resource ./resource/alb-ingress-controller/rbac-role.yaml
+ kubectl apply -f alb-ingress-controller/rbac-role.yaml
  
  ```
 
@@ -154,7 +154,7 @@ eksctl create iamserviceaccount \
 
  修改alb-ingress-controller.yaml 以下配置，参考示例 resource/alb-ingress-controller/alb-ingress-controller.yaml
 (eksctl 自动创建的 vpc 默认为 eksctl-<集群名字>-cluster/VPC)
-  
+
   ```bash
   #修改以下内容
   - --cluster-name=<步骤2 创建的集群名字>
@@ -166,7 +166,7 @@ eksctl create iamserviceaccount \
               value: cn-northwest-1
     
   #使用修改好的yaml文件部署ALB Ingress Controller
- kubectl apply -f ./resource/alb-ingress-controller/alb-ingress-controller.yaml
+ kubectl apply -f alb-ingress-controller/alb-ingress-controller.yaml
 
  
  #确认ALB Ingress Controller是否工作
