@@ -13,14 +13,14 @@
 #中国区请使用aws-ebs-csi-driver/ebs-csi-iam-policy.json
 aws iam create-policy \
     --policy-name Amazon_EBS_CSI_Driver \
-    --policy-document file://./resource/aws-ebs-csi-driver/ebs-csi-iam-policy.json \
+    --policy-document file://./aws-ebs-csi-driver/ebs-csi-iam-policy.json \
     --region ${AWS_REGION}
         
 #返回示例,请记录返回的Plociy ARN
 POLICY_NAME=$(aws iam list-policies --query 'Policies[?PolicyName==`EKS_EBS_CSI_Driver_Policy`].Arn' 、
     --output text --region ${AWS_REGION})
 ```
-    
+
 > 5.1.2 获取EKS工作节点的IAM role
 
 ```bash
