@@ -17,8 +17,7 @@ aws iam create-policy \
     --region ${AWS_REGION}
         
 #返回示例,请记录返回的Plociy ARN
-POLICY_NAME=$(aws iam list-policies --query 'Policies[?PolicyName==`EKS_EBS_CSI_Driver_Policy`].Arn' 、
-    --output text --region ${AWS_REGION})
+POLICY_NAME=$(aws iam list-policies --query 'Policies[?PolicyName==`Amazon_EBS_CSI_Driver`].Arn' --output text --region ${AWS_REGION})
 ```
 
 > 5.1.2 获取EKS工作节点的IAM role
