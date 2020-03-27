@@ -133,11 +133,16 @@ ip-192-168-86-36.cn-northwest-1.compute.internal    Ready    <none>   3d4h   v1.
 
 由于防火墙或安全限制，海外gcr.io, quay.io的镜像可能无法下载，为了不手动修改原始yaml文件的镜像路径，采用下面webhook的方式，自动修改国内配置的镜像路径。
 详情参考 [amazon-api-gateway-mutating-webhook-for-k8](https://github.com/aws-samples/amazon-api-gateway-mutating-webhook-for-k8)
-1. 修改 api-gateway.yaml 中 image_mirrors 下面的镜像地址为你偏好的国内镜像地址
+1. 克隆 amazon-api-gateway-mutating-webhook-for-k8
+```bash
 ```bash
 git clone git@github.com:aws-samples/amazon-api-gateway-mutating-webhook-for-k8.git
 cd amazon-api-gateway-mutating-webhook-for-k8
-export S3_BUCKET=my_s3_bucket
+```
+2. 修改 lambda_function.py 中 image_mirrors 下面的镜像地址为你偏好的国内镜像地址
+
+    例如采用 https://github.com/nwcdlabs/container-mirror 上列出的镜像地址
+```bash
 # modify the lambda_function.py
 image_mirrors = {
   '/': '048912060910.dkr.ecr.cn-northwest-1.amazonaws.com.cn/dockerhub/',
@@ -146,6 +151,7 @@ image_mirrors = {
   'k8s.gcr.io/': '048912060910.dkr.ecr.cn-northwest-1.amazonaws.com.cn/gcr/google_containers/'
 }
 
+export S3_BUCKET=my_s3_bucket
 sam package -t sam-template.yaml --s3-bucket ${S3_BUCKET} --output-template-file packaged.yaml --region ${AWS_REGION}
 
 sam deploy -t packaged.yaml --stack-name amazon-api-gateway-mutating-webhook-for-k8 --capabilities CAPABILITY_IAM --region ${AWS_REGION}
@@ -163,7 +169,7 @@ kubectl apply -f mutating-webhook.yaml
 kubectl apply -f ./nginx-gcr.yaml
 kubectl get pods
 kubectl get pod nginx-gcr-deployment-xxxx -o=jsonpath='{.spec.containers[0].image}'
-# 结果应显示为配置的gcr.io的路径
+# 结果应显示为配置的gcr.io的路径，例如按照上述image_mirrors配置，结果为：
 048912060910.dkr.ecr.cn-northwest-1.amazonaws.com.cn/gcr/google_containers/nginx
 # 清理
 kubectl delete -f ./nginx-gcr.yaml
