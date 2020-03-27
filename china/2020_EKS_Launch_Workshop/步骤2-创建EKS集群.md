@@ -23,10 +23,10 @@
  eksctl create cluster --name=${CLUSTER_NAME} --node-type t3.medium --managed --alb-ingress-access --region=${AWS_REGION}
 
  ```
- 
+
 参考输出
  ```bash
- [ℹ]  eksctl version 0.15.0-rc.1
+ [ℹ]  eksctl version 0.15.0
  [ℹ]  using region cn-northwest-1
  [ℹ]  setting availability zones to [cn-northwest-1b cn-northwest-1a cn-northwest-1c]
  [ℹ]  subnets for cn-northwest-1b - public:192.168.0.0/19 private:192.168.96.0/19
@@ -62,7 +62,7 @@
   ```bash
    kubectl get node
   ```
-  
+
   参考输出
  ```bash
  NAME                                                STATUS   ROLES    AGE    VERSION
@@ -129,30 +129,17 @@ ip-192-168-40-132.cn-northwest-1.compute.internal   Ready    <none>   4d1h   v1.
 ip-192-168-86-36.cn-northwest-1.compute.internal    Ready    <none>   3d4h   v1.14.9-eks-1f0ca9
 ```
 
-2.4 （可选）中国区镜像处理
+2.4  中国区镜像处理
 
-由于防火墙或安全限制，海外gcr.io, quay.io的镜像可能无法下载，为了不手动修改原始yaml文件的镜像路径，采用下面webhook的方式，自动修改国内配置的镜像路径。
-详情参考 [amazon-api-gateway-mutating-webhook-for-k8](https://github.com/aws-samples/amazon-api-gateway-mutating-webhook-for-k8)
-1. 修改 api-gateway.yaml 中 image_mirrors 下面的镜像地址为你偏好的国内镜像地址
+  由于防火墙或安全限制，海外gcr.io, quay.io的镜像可能无法下载，为了不手动修改原始yaml文件的镜像路径，可以使用 [amazon-api-gateway-mutating-webhook-for-k8](https://github.com/aws-samples/amazon-api-gateway-mutating-webhook-for-k8) 项目实现镜像自动映射,  本workshop所需要的镜像已经由nwcdlabs/container-mirror准备好了，直接部署MutatingWebhookConfiguration即可。
+
+1. 部署webhook配置文件
 ```bash
-git clone git@github.com:aws-samples/amazon-api-gateway-mutating-webhook-for-k8.git
-cd amazon-api-gateway-mutating-webhook-for-k8
-# 
-image_mirrors = {
-            'gcr.io/': '<镜像地址>/',
-            'k8s.gcr.io/': '<镜像地址>/google-containers/',
-            'quay.io/': '<镜像地址>/'
-}
+kubectl apply -f https://raw.githubusercontent.com/nwcdlabs/container-mirror/master/webhook/mutating-webhook.yaml
 ```
 
-2. 在AWS console 部署 Cloudformation template api-gateway.yaml 
+2. 部署样例应用，验证webhook工作正常
 
-3. Cloudformation 部署完成之后，在 EKS 集群部署 webhook
-```bash
-kubectl apply -f mutating-webhook.yaml
-```
-
-部署样例应用，验证webhook工作正常
 ```bash
 kubectl apply -f ./nginx-gcr.yaml
 kubectl get pods
