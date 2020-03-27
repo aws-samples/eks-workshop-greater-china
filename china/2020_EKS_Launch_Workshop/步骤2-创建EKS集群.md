@@ -137,17 +137,23 @@ ip-192-168-86-36.cn-northwest-1.compute.internal    Ready    <none>   3d4h   v1.
 ```bash
 git clone git@github.com:aws-samples/amazon-api-gateway-mutating-webhook-for-k8.git
 cd amazon-api-gateway-mutating-webhook-for-k8
-# 
+export S3_BUCKET=my_s3_bucket
+# modify the lambda_function.py
 image_mirrors = {
-            'gcr.io/': '<镜像地址>/',
-            'k8s.gcr.io/': '<镜像地址>/google-containers/',
-            'quay.io/': '<镜像地址>/'
+  '/': '048912060910.dkr.ecr.cn-northwest-1.amazonaws.com.cn/dockerhub/',
+  'quay.io/': '048912060910.dkr.ecr.cn-northwest-1.amazonaws.com.cn/quay/',
+  'gcr.io/': '048912060910.dkr.ecr.cn-northwest-1.amazonaws.com.cn/gcr/',
+  'k8s.gcr.io/': '048912060910.dkr.ecr.cn-northwest-1.amazonaws.com.cn/gcr/google_containers/'
 }
+
+sam package -t sam-template.yaml --s3-bucket ${S3_BUCKET} --output-template-file packaged.yaml --region ${AWS_REGION}
+
+sam deploy -t packaged.yaml --stack-name amazon-api-gateway-mutating-webhook-for-k8 --capabilities CAPABILITY_IAM --region ${AWS_REGION}
 ```
 
-2. 在AWS console 部署 Cloudformation template api-gateway.yaml 
+2. 在AWS Cloudformation console 找到 名称为 amazon-api-gateway-mutating-webhook-for-k8 的stack, 拷贝 Stack 输出中的 APIGatewayURL ，
 
-3. Cloudformation 部署完成之后，在 EKS 集群部署 webhook
+3. 修改 mutating-webhook.yaml, 替换 url 为 上述APIGatewayURL的拷贝值，在 EKS 集群部署 webhook
 ```bash
 kubectl apply -f mutating-webhook.yaml
 ```
@@ -158,6 +164,7 @@ kubectl apply -f ./nginx-gcr.yaml
 kubectl get pods
 kubectl get pod nginx-gcr-deployment-xxxx -o=jsonpath='{.spec.containers[0].image}'
 # 结果应显示为配置的gcr.io的路径
+048912060910.dkr.ecr.cn-northwest-1.amazonaws.com.cn/gcr/google_containers/nginx
 # 清理
 kubectl delete -f ./nginx-gcr.yaml
 ```
