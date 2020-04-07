@@ -198,3 +198,12 @@ kubectl get secret --namespace grafana grafana -o jsonpath="{.data.admin-passwor
 查看Pods的监控面板
 
 ![avatar](https://github.com/toreydai/eks-workshop-greater-china/blob/master/china/2020_EKS_Launch_Workshop/media/Pictures/prometheus5.png)
+
+4.清理环境
+
+```
+helm uninstall prometheus --namespace prometheus
+helm uninstall grafana --namespace grafana
+kubectl delete namespace prometheus
+kubectl delete namespace grafana
+```
