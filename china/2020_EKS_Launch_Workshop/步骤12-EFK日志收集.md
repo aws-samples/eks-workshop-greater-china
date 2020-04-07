@@ -89,7 +89,7 @@ kubectl apply -f ./fluentd.yml
 ```
 kubectl get pods -w --namespace=kube-system
 ```
-3.将CloudWatch Logs流式传输到Elasticsearch
+4.将CloudWatch Logs流式传输到Elasticsearch
 
 创建传输过程中使用的Lambda附加的Role:*lambda_basic\_execution*
 
@@ -163,7 +163,12 @@ var endpointParts = endpoint.match(/^([^\.]+)\.?([^\.]*)\.?([^\.]*)\.amazonaws\.
 点击发现，以探索日志
 ![avatar](https://github.com/toreydai/eks-workshop-greater-china/blob/master/china/2020_EKS_Launch_Workshop/media/Pictures/efk10.png)
 
-
+5.清理环境
+```
+kubectl delete -f ./fluentd.yml
+aws es delete-elasticsearch-domain --domain-name kubernetes-logs
+aws logs delete-log-group --log-group-name /eks/eksworkshop/containers
+```
 
 
 
