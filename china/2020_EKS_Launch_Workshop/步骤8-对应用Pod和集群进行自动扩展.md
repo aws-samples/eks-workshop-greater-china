@@ -28,6 +28,8 @@ kubectl get apiservice v1beta1.metrics.k8s.io -o yaml
 
 8.1.2 安装 HPA sample application php-apache
 ```bash
+kubectl apply -f https://k8s.io/examples/application/php-apache.yaml
+
 # Set threshold to CPU30% auto-scaling, and up to 5 pod replicas
 kubectl autoscale deployment php-apache --cpu-percent=30 --min=1 --max=5
 kubectl get hpa
