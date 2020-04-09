@@ -30,7 +30,7 @@
   
   * 步骤13 部署Prometheus & Grafana监控  (准备中...)
   
-  * 步骤14 在EKS集群上部署Istio 服务网格 (准备中...)
+  * [步骤14 在EKS集群上部署Istio 服务网格](步骤14-在EKS集群上部署Istio服务网格.md)
   
     
     
