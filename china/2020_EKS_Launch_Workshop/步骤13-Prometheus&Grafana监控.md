@@ -1,10 +1,17 @@
-1.部署Prometheus
+13.1 前提条件
 
-检查helm是否已安装
+检查Helm是否已安装
 
 ```
 helm list
 ```
+如未安装Helm，请参照" 步骤9-使用Helm部署应用/9.1 Install Helm "安装Helm，并添加stable repository
+
+```
+helm repo add stable https://burdenbear.github.io/kube-charts-mirror/
+```
+13.2 部署Prometheus
+
 安装Prometheus
 
 ```
@@ -82,41 +89,31 @@ spec:
   - port: 9090
     protocol: TCP
     targetPort: 9090
-    nodePort: 30080
   selector:
     app: prometheus
     component: server
     release: prometheus
-  type: NodePort
+  type: ClusterIP
 EOF
 
+kubectl apply -f prometheus-service.yml
 ```
-
-查看Worker Node的公有IP，
-
-```
-kubecetl get nodes -o wide
+通过Kube-proxy访问Prometheus
 
 ```
-参考输出如下，复制Node的EXTERNAL-IP
+kubectl proxy --port=8080 --address='0.0.0.0' --disable-filter=true
+```
+打开浏览器，将\<localhost>替换为本机ip，访问Prometheus
 
 ```
-NAME                                                STATUS   ROLES    AGE    VERSION               INTERNAL-IP      EXTERNAL-IP    OS-IMAGE         KERNEL-VERSION                  CONTAINER-RUNTIME
-ip-192-168-61-115.cn-northwest-1.compute.internal   Ready    <none>   4d4h   v1.15.10-eks-bac369   192.168.61.115   52.xx.xx.xx     Amazon Linux 2   4.14.165-133.209.amzn2.x86_64   docker://18.9.9
-ip-192-168-67-245.cn-northwest-1.compute.internal   Ready    <none>   4d4h   v1.15.10-eks-bac369   192.168.67.245   52.xx.xx.xx     Amazon Linux 2   4.14.165-133.209.amzn2.x86_64   docker://18.9.9
+http://<localhost>:8080/api/v1/namespaces/prometheus/services/prometheus-nginx/proxy/graph
 
 ```
-打开浏览器，访问Prometheus
-
-```
-http://<node-external-ip>:30080
-
-```
-浏览器中依次选择Status/Targets，在UI中查看Prometheus监控的所有对象和指标
+依次选择Status/Targets，在UI中查看Prometheus监控的所有对象和指标
 
 ![avatar](https://github.com/toreydai/eks-workshop-greater-china/blob/master/china/2020_EKS_Launch_Workshop/media/Pictures/prometheus1.png)
 
-2.部署Grafana
+13.3 部署Grafana
 
 在部署参数中，将datasource指向Prometheus，并为Grafana创建LoadBalancer
 
@@ -169,9 +166,9 @@ echo "http://$ELB"
 ```
 kubectl get secret --namespace grafana grafana -o jsonpath="{.data.admin-password}" | base64 --decode ; echo
 ```
-3.查看监控面板
+13.4 查看监控面板
 
-3.1创建集群监控面板
+13.4.1 创建集群监控面板
 
 * 左侧面板点击' + '，选择' Import  '
 * Grafana.com Dashboard下输入3119
@@ -184,7 +181,7 @@ kubectl get secret --namespace grafana grafana -o jsonpath="{.data.admin-passwor
 
 ![avatar](https://github.com/toreydai/eks-workshop-greater-china/blob/master/china/2020_EKS_Launch_Workshop/media/Pictures/prometheus3.png)
 
-3.1创建Pods监控面板
+13.4.2 创建Pods监控面板
 
 * 左侧面板点击' + '，选择' Import  '
 * Grafana.com Dashboard下输6417
@@ -199,7 +196,7 @@ kubectl get secret --namespace grafana grafana -o jsonpath="{.data.admin-passwor
 
 ![avatar](https://github.com/toreydai/eks-workshop-greater-china/blob/master/china/2020_EKS_Launch_Workshop/media/Pictures/prometheus5.png)
 
-4.清理环境
+13.5 清理环境
 
 ```
 helm uninstall prometheus --namespace prometheus
