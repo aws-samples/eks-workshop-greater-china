@@ -28,7 +28,7 @@
   
   * 步骤12 使用EFK收集、处理日志  (准备中...)
   
-  * 步骤13 部署Prometheus & Grafana监控  (准备中...)
+  * [步骤13 部署Prometheus & Grafana监控](步骤13-Prometheus&Grafana监控.md)  
   
   * [步骤14 在EKS集群上部署Istio 服务网格](步骤14-在EKS集群上部署Istio服务网格.md)
   
@@ -40,7 +40,8 @@
     >请下载本git repository
     
     ```bash
-  git clone https://github.com/aws-samples/eks-workshop-greater-china.git
-  ```
+      git clone https://github.com/aws-samples/eks-workshop-greater-china.git
+    ```
+    
     **重要说明:** 本实验中使用到的gcr.io/k8s.gcr.io, quay.io镜像如果国内无法直接访问,请使用第三方image镜像或者个人dockerhub仓库,(可参考2.4 中国区镜像处理章节配置自动修改模式或者在实验中自行编辑对应的yaml文件).
 

@@ -17,7 +17,7 @@ AWS GCR 2020 EKS Launch Hands-on Workshop
 -   [步骤10-可用性-健康检查](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_Launch_Workshop/步骤10-可用性-健康检查.md)
 -   [步骤11-使用Calio加固EKS集群安全](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_Launch_Workshop/步骤11-使用Calio加固EKS集群安全.md)
 -   步骤12 使用EFK收集、处理日志  (准备中...)
--   步骤13 部署Prometheus & Grafana监控  (准备中...)
+-   [步骤13 部署Prometheus & Grafana监控](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_Launch_Workshop/步骤13-Prometheus&Grafana监控.md)
 -   [步骤14 在EKS集群上部署Istio 服务网格](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_Launch_Workshop/步骤14-在EKS集群上部署Istio服务网格.md)
 
 #### Global Region
