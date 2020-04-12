@@ -1,4 +1,4 @@
-1.配置工作线程节点的权限
+12.1 配置工作线程节点的权限
 
 获取工作线程节点Role ARN
 
@@ -7,23 +7,35 @@ STACK_NAME=$(eksctl get nodegroup --cluster eksworkshop -o json | jq -r '.[].Sta
 ROLE_NAME=$(aws cloudformation describe-stack-resources --stack-name $STACK_NAME | jq -r '.StackResources[] | select(.ResourceType=="AWS::IAM::Role") | .PhysicalResourceId')
 echo "export ROLE_NAME=${ROLE_NAME}" | tee -a ~/.bash_profile
 ```
+
 创建权限Policy文件，主要是CloudWatch Logs权限
 
 ```
-cat <<EoF > ./k8s-logs-policy.json
+cat <<EoF > ./eks-fluent-bit-daemonset-policy.json
 {
     "Version": "2012-10-17",
     "Statement": [
         {
+            "Effect": "Allow",
+            "Action": "logs:PutLogEvents",
+            "Resource": "arn:aws-cn:logs:*:*:log-group:*:*:*"
+        },
+        {
+            "Effect": "Allow",
             "Action": [
-                "logs:DescribeLogGroups",
-                "logs:DescribeLogStreams",
-                "logs:CreateLogGroup",
                 "logs:CreateLogStream",
+                "logs:DescribeLogStreams",
                 "logs:PutLogEvents"
             ],
-            "Resource": "*",
-            "Effect": "Allow"
+            "Resource": "arn:aws-cn:logs:*:*:log-group:*"
+        },
+        {
+            "Effect": "Allow",
+             "Action": [
+                "logs:CreateLogGroup",
+                "logs:DescribeLogGroups"
+            ],
+            "Resource": "*"
         }
     ]
 }
@@ -34,7 +46,7 @@ EoF
 ```
 aws iam put-role-policy --role-name $ROLE_NAME \
 --policy-name Logs-Policy-For-Worker \
---policy-document file://./k8s-logs-policy.json
+--policy-document file://./eks-fluent-bit-daemonset-policy.json
 ```
 
 查看Policy是否已附加到工作线程节点Role
@@ -43,7 +55,7 @@ aws iam put-role-policy --role-name $ROLE_NAME \
 aws iam get-role-policy --role-name $ROLE_NAME \
 --policy-name Logs-Policy-For-Worker
 ```
-2.创建Amazon Elasticsearch Service
+12.2 创建Amazon Elasticsearch Service
 
 使用CLI命令行创建一个包含2节点的Elasticsearch Domain
 
@@ -63,33 +75,54 @@ aws es describe-elasticsearch-domain --domain-name kubernetes-logs \
 --query 'DomainStatus.Processing'
 ```
 
-3.部署Fluentd
+12.3 部署Fluent-bit
 
-下载Fluentd.yml文件
-
-```
-wget https://eksworkshop.com/intermediate/230_logging/deploy.files/fluentd.yml
-```
-将env中的REGION和CLUSTER_NAME修改为当前环境的值
+下载Fluent-bit.yml文件
 
 ```
-    env:
-      - name: REGION
-        value: cn-northwest-1
-      - name: CLUSTER_NAME
-        value: eksworkshop
+wget https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_Launch_Workshop/resource/efk/fluent-bit.yaml
 ```
-部署Fluentd
+部署Fluent-bit
 
 ```
-kubectl apply -f ./fluentd.yml
+kubectl apply -f ./fluent-bit.ymal
 ```
 观察Fluentd Pod状态，直到其处于Running状态
 
 ```
-kubectl get pods -w --namespace=kube-system
+kubectl get pods -w
 ```
-4.将CloudWatch Logs流式传输到Elasticsearch
+通过查看日志，验证 Fluent Bit 守护程序集：
+
+```
+Found 2 pods, using pod/fluentbit-lq6qb
+tput: No value for $TERM and no -T specified
+tput: No value for $TERM and no -T specified
+AWS for Fluent Bit Container Image Version 2.3.0
+tput: No value for $TERM and no -T specified
+Fluent Bit v1.4.2
+* Copyright (C) 2019-2020 The Fluent Bit Authors
+* Copyright (C) 2015-2018 Treasure Data
+* Fluent Bit is a CNCF sub-project under the umbrella of Fluentd
+* https://fluentbit.io
+
+[2020/04/12 14:57:09] [ info] [storage] version=1.0.3, initializing...
+[2020/04/12 14:57:09] [ info] [storage] in-memory
+[2020/04/12 14:57:09] [ info] [storage] normal synchronization mode, checksum disabled, max_chunks_up=128
+[2020/04/12 14:57:09] [ info] [engine] started (pid=1)
+time="2020-04-12T14:57:09Z" level=info msg="[cloudwatch 0] plugin parameter log_group = 'fluent-bit-cloudwatch'\n"
+time="2020-04-12T14:57:09Z" level=info msg="[cloudwatch 0] plugin parameter log_stream_prefix = 'from-fluent-bit-'\n"
+time="2020-04-12T14:57:09Z" level=info msg="[cloudwatch 0] plugin parameter log_stream = ''\n"
+time="2020-04-12T14:57:09Z" level=info msg="[cloudwatch 0] plugin parameter region = 'cn-northwest-1'\n"
+time="2020-04-12T14:57:09Z" level=info msg="[cloudwatch 0] plugin parameter log_key = ''\n"
+time="2020-04-12T14:57:09Z" level=info msg="[cloudwatch 0] plugin parameter role_arn = ''\n"
+time="2020-04-12T14:57:09Z" level=info msg="[cloudwatch 0] plugin parameter auto_create_group = 'true'\n"
+time="2020-04-12T14:57:09Z" level=info msg="[cloudwatch 0] plugin parameter endpoint = ''\n"
+time="2020-04-12T14:57:09Z" level=info msg="[cloudwatch 0] plugin parameter credentials_endpoint = \n"
+time="2020-04-12T14:57:09Z" level=info msg="[cloudwatch 0] plugin parameter log_format = ''\n"
+[2020/04/12 14:57:09] [ info] [sp] stream processor started
+```
+12.4 将CloudWatch Logs流式传输到Elasticsearch
 
 创建传输过程中使用的Lambda附加的Role:*lambda_basic\_execution*
 
@@ -134,7 +167,7 @@ aws iam put-role-policy --role-name lambda_basic_execution --policy-name lambda-
 aws iam get-role-policy --role-name lambda_basic_execution--policy-name lambda-es-policy
 ```
 
-登陆AWS Console进行操作，选择log group: */eks/eksworkshop-eksctl/containers*
+登陆AWS Console进行操作，选择log group: fluent-bit-cloudwatch
 ![avatar](https://github.com/toreydai/eks-workshop-greater-china/blob/master/china/2020_EKS_Launch_Workshop/media/Pictures/efk1.png)
 ![avatar](https://github.com/toreydai/eks-workshop-greater-china/blob/master/china/2020_EKS_Launch_Workshop/media/Pictures/efk2.png)
 选择Elasticsearch Cluster *kubernetes-logs* 和IAM Role *lambda_basic\_execution*
@@ -163,7 +196,7 @@ var endpointParts = endpoint.match(/^([^\.]+)\.?([^\.]*)\.?([^\.]*)\.amazonaws\.
 点击发现，以探索日志
 ![avatar](https://github.com/toreydai/eks-workshop-greater-china/blob/master/china/2020_EKS_Launch_Workshop/media/Pictures/efk10.png)
 
-5.清理环境
+12.5 清理环境
 ```
 kubectl delete -f ./fluentd.yml
 aws es delete-elasticsearch-domain --domain-name kubernetes-logs
