@@ -72,7 +72,7 @@ Jupyter notebook 通常用于数据清洗和转换、数值模拟、统计建模
 
 #### 训练模型
 
-打开 src/mnist-tensorflow-jupyter.py并把代码粘贴到notebook中. 这段Python样例代码会使用TensorFlow基于MNIST数据集训练模型，点击Run运行训练代码。
+打开 resouce/mnist-tensorflow-jupyter.py并把代码粘贴到notebook中. 这段Python样例代码会使用TensorFlow基于MNIST数据集训练模型，点击Run运行训练代码。
 
 ![jupyter-mnist-code](images/jupyter-mnist-code.png)
 
@@ -81,18 +81,4 @@ Jupyter notebook 通常用于数据清洗和转换、数值模拟、统计建模
 ![jupyter-mnist-training](images/jupyter-mnist-training.png)
 
 训练完成后，前几行显示下载了TensorFlow和Keras数据集。训练数据集是60k图像，测试数据集为10k图像，并给出了用于训练的超参数，五次Epoch的输出，训练完成后输出了模型的精度。
-
-#### 清理资源
-
-使用以下命令将其删除
-
-```bash
-cd  ${KF_DIR} 
-#这将删除通过kfctl创建的kubeflow和istio-system名称空间。
-kfctl delete -f ${CONFIG_FILE} 
-#删除eks cluster
-eksctl delete cluster kubeflow
-```
-
-如果eksclt delete失败，请手动删除CloudFormation堆栈。将策略手动添加到IAM角色或更改安全组甚至可能失败，因此您可能需要手动还原或删除它。如果您忘记删除它，则需要付费，因此您可能需要在AWS管理控制台中确认删除。
 
