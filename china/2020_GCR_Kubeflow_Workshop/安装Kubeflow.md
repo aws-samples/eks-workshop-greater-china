@@ -1,6 +1,6 @@
 #### 前提
 
-本次kubeflow workshop 需要的软件环境有 aws cli , eksctl ,kubectl,e aws-iam-authenticator以及eks对应操作的IAM权限。具体安装步骤请[参考]([https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_Launch_Workshop/%E6%AD%A5%E9%AA%A41-%E5%87%86%E5%A4%87%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83.md](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_Launch_Workshop/步骤1-准备实验环境.md))。
+本kubeflow workshop 需要的软件环境有 aws cli , eksctl ,kubectl,e aws-iam-authenticator以及eks对应操作的IAM权限。具体安装步骤请参考[2020_EKS_Launch_Workshop/步骤1-准备实验环境]([https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_Launch_Workshop/%E6%AD%A5%E9%AA%A41-%E5%87%86%E5%A4%87%E5%AE%9E%E9%AA%8C%E7%8E%AF%E5%A2%83.md](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china/2020_EKS_Launch_Workshop/步骤1-准备实验环境.md))。
 
 本workshop选择了缺省的kfctl配置文件，以简化kubeflow安装。但是，我们建议在生产环境中安装Cognito配置并添加身份验证和SSL(通过ACM)。有关启用Cognito所需的其他步骤，请参阅[Kubeflow documentation](https://www.kubeflow.org/docs/aws/deploy/install-kubeflow/)文档
 
