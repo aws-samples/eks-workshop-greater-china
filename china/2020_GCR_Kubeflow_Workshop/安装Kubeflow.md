@@ -6,7 +6,7 @@
 
 #### 设置环境变量
 
-执行以下命令来设置环境变量，然后为这个部署设置Kubeflow应用程序目录
+执行以下命令来设置环境变量，然后为这个部署设置Kubeflow应用程序目录,在CLUSTER_NAME指定您的EKS集群名称
 
 ```bash
 export REGION=cn-northwest-1
