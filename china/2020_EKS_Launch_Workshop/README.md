@@ -26,7 +26,7 @@
 
   * [步骤11-使用Calio加固EKS集群安全](步骤11-使用Calio加固EKS集群安全.md)
   
-  * 步骤12 使用EFK收集、处理日志  (准备中...)
+  * [步骤12 使用EFK收集、处理日志](步骤12-EFK日志收集.md)
   
   * [步骤13 部署Prometheus & Grafana监控](步骤13-Prometheus&Grafana监控.md)  
   
