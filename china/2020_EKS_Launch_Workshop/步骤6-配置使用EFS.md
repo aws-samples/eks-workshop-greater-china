@@ -11,11 +11,12 @@ aws ec2 authorize-security-group-ingress --group-id ${SGGroupID}  --protocol tcp
 
 # 创建EFS file system 和 mount-target, 请根据你的环境替换 FileSystemId， SubnetID， SGGroupID
 aws efs create-file-system --creation-token eks-efs --region ${AWS_REGION}
+# FileSystemId 为上一步创建的文件系统id
+# SubnetID 需要挂载目标区域子网id，可以为 EKS Node 所在区域的子网，如果有多个则需要挂载多次
+# SGGroupID 为上一步创建的EFS所属的 SG id
 aws efs create-mount-target --file-system-id FileSystemId --subnet-id SubnetID --security-group SGGroupID
 
 ```
-
-
 
 6.2. 部署EFS驱动和示例程序
 [官方文档]（https://docs.aws.amazon.com/zh_cn/eks/latest/userguide/efs-csi.html）
@@ -35,7 +36,7 @@ The v.0.3.0 does work, you can also build your image to use v.0.2.0 CSI
 
 ```bash
 #使用EFS CSI v0.3.0 镜像
-kubectl apply -k /aws-efs-csi-driver/deploy/kubernetes/overlays/stable
+kubectl apply -k ./aws-efs-csi-driver/deploy/kubernetes/overlays/stable
 kubectl get pods -n kube-system
 
 NAME                                      READY   STATUS    RESTARTS   AGE
