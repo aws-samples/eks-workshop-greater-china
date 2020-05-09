@@ -41,7 +41,7 @@ spec:
             # AWS VPC ID this ingress controller will use to create AWS resources.
             # If unspecified, it will be discovered from ec2metadata.
             # - --aws-vpc-id=vpc-xxxxxx
-            - --aws-vpc-id=vpc-009f5d1d6aa681273
+            - --aws-vpc-id=<你的vpc-id>
 
             # AWS region this ingress controller will operate in.
             # If unspecified, it will be discovered from ec2metadata.
@@ -54,6 +54,8 @@ spec:
             # Maximum number of times to retry the aws calls.
             # defaults to 10.
             # - --aws-max-retries=10
+            # 如果你在中国区使用alb-ingress-controller 1.1.7以及以上版本 需要禁用
+            #- --feature-gates=waf=false,wafv2=false 
           env:
             - name: AWS_REGION
               value: cn-northwest-1
