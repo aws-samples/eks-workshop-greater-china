@@ -1,4 +1,4 @@
-Kubeflow Fairing是一个Python软件包，可轻松在[Kubeflow](https://www.kubeflow.org/docs/about/kubeflow/)上训练和部署ML模型。Kubeflow Fairing还可以扩展为在其他平台上进行培训或部署。目前，Kubeflow Fairing已扩展为可在[Google AI平台](https://cloud.google.com/ml-engine/docs/)上进行培训。
+Kubeflow Fairing是一个Python软件包，可轻松在[Kubeflow](https://www.kubeflow.org/docs/about/kubeflow/)上训练和部署ML模型。Kubeflow Fairing还可以扩展为在其他平台上进行培训或部署。目前，Kubeflow Fairing已扩展为可在aws上进行培训。
 
 Kubeflow Fairing将您的Jupyter笔记本，Python函数或Python文件打包为Docker映像，然后在Kubeflow或AI平台上部署并运行培训作业。训练工作完成后，您可以使用Kubeflow Fairing将训练后的模型部署为Kubeflow上的预测端点。
 

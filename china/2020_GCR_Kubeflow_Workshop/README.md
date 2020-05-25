@@ -12,7 +12,7 @@ Kubeflow提供了一种在Kubernetes上运行机器学习工作负载的简单�
 
   * [使用Kubeflow fairing](Kubeflow_fairing.md)
 
-  * [使用Kubeflow pipeline](Kubeflow_Pipelines.m)
+  * [使用Kubeflow pipeline](Kubeflow_Pipelines.md)
 
   * [Kubeflow 分布式训练]准备中......
 
