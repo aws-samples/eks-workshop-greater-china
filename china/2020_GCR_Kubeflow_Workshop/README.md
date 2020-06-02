@@ -10,9 +10,9 @@ Kubeflow提供了一种在Kubernetes上运行机器学习工作负载的简单�
 
   * [创建和使用jupter notebook](创建和使用jupter笔记本.md)
 
-  * [Kubeflow fairing]准备中......
+  * [使用Kubeflow fairing](Kubeflow_fairing.md)
 
-  * [Kubeflow pipeline]准备中......
+  * [使用Kubeflow pipeline](Kubeflow_Pipelines.md)
 
   * [Kubeflow 分布式训练]准备中......
 
