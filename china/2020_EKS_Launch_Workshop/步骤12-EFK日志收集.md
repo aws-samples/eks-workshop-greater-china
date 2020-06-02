@@ -85,7 +85,7 @@ wget https://github.com/aws-samples/eks-workshop-greater-china/blob/master/china
 部署Fluent-bit
 
 ```
-kubectl apply -f ./fluent-bit.ymal
+kubectl apply -f ./fluent-bit.yaml
 ```
 观察Fluentd Pod状态，直到其处于Running状态
 
@@ -94,6 +94,10 @@ kubectl get pods -w
 ```
 通过查看日志，验证 Fluent Bit 守护程序集：
 
+```
+kubectl logs ds/fluentbit
+```
+参考输出
 ```
 Found 2 pods, using pod/fluentbit-lq6qb
 tput: No value for $TERM and no -T specified
@@ -164,7 +168,7 @@ cat <<EoF > ./lambda-es-policy.json
 }
 EoF
 aws iam put-role-policy --role-name lambda_basic_execution --policy-name lambda-es-policy --policy-document file://./lambda-es-policy.json
-aws iam get-role-policy --role-name lambda_basic_execution--policy-name lambda-es-policy
+aws iam get-role-policy --role-name lambda_basic_execution --policy-name lambda-es-policy
 ```
 
 登陆AWS Console进行操作，选择log group: fluent-bit-cloudwatch
