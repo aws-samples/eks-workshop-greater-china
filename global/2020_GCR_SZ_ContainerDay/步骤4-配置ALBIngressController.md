@@ -20,6 +20,9 @@ aws iam create-policy --policy-name ALBIngressControllerIAMPolicy \
 # 记录返回的Plociy ARN
 POLICY_NAME=$(aws iam list-policies --query 'Policies[?PolicyName==`ALBIngressControllerIAMPolicy`].Arn' --output text )
 
+#查看是否正常返回Plicy ARN 
+echo $POLICY_NAME
+
 ```
 
 >4.2.1.3 请使用上述返回的policy ARN创建service account
@@ -35,7 +38,7 @@ eksctl create iamserviceaccount \
        --approve
 
 参考输出
-[ℹ]  eksctl version 0.24.0-rc.0
+[ℹ]  eksctl version 0.24.0
 [ℹ]  using region us-west-2
 [ℹ]  1 iamserviceaccount (kube-system/alb-ingress-controller) was included (based on the include/exclude rules)
 [!]  metadata of serviceaccounts that exist in Kubernetes will be updated, as --override-existing-serviceaccounts was set
@@ -54,7 +57,7 @@ eksctl create iamserviceaccount \
  >4.3.1 创建 ALB Ingress Controller 所需要的RBAC
 
  ```bash
- kubectl apply -f rbac-role.yaml
+ kubectl apply -f alb-ingress-controller/rbac-role.yaml
  
  ```
 
@@ -68,9 +71,13 @@ eksctl create iamserviceaccount \
  aws ec2 describe-vpcs --filters "Name=tag:Name,Values=eksctl-${CLUSTER_NAME}-cluster/VPC" --query "Vpcs[0].VpcId" --out text
  
   
-  #修改alb-ingress-controller.yaml以下内容
-  - --cluster-name=<步骤2 创建的集群名字>
-  - --aws-vpc-id=<eksctl 创建的vpc-id>  
+  #使用vi修改alb-ingress-controller/alb-ingress-controller.yaml 将vpc-xxxxxx替换成上面查询回来的vpc id
+  - --aws-vpc-id=vpc-xxxxxx  
+  
+  #其他参数已经设置好了不用修改
+  #- --cluster-name=eksworkshop
+  #- --aws-region=us-west-2
+              
   
   #中国区 1.1.7 waf,wafv2修复方式
   #如果你使用alb-ingress-controller 1.1.8 需要禁用waf,wafv2
@@ -78,7 +85,7 @@ eksctl create iamserviceaccount \
 
              
  #使用修改好的yaml文件部署ALB Ingress Controller
- kubectl apply -f alb-ingress-controller.yaml
+ kubectl apply -f alb-ingress-controller/alb-ingress-controller.yaml
 
  
  #确认ALB Ingress Controller是否工作
@@ -98,8 +105,8 @@ AWS ALB Ingress controller
 >4.4.1 为nginx service创建ingress
 
 ```bash
-cd resource/alb-ingress-controller
-kubectl apply -f nginx-alb-ingress.yaml
+kubectl apply -f alb-ingress-controller/nginx-alb-ingress.yaml
+kubectl get ingress
 ```
 
 >4.4.2 验证
@@ -112,23 +119,8 @@ curl -v $ALB
 kubectl logs -n kube-system $(kubectl get po -n kube-system | egrep -o alb-ingress[a-zA-Z0-9-]+)
 ```
 
-> 4.4.3 清理
+> 4.4.3 清理测试应用
 ```bash
 kubectl delete -f nginx-alb-ingress.yaml
-```
-
-4.5 使用ALB Ingress，部署2048 game 
-
-```bash
-
-kubectl create namespace 2048-game
-kubectl apply -f 2048/
-
-#获取访问地址，在浏览器中访问2048游戏
-kubectl get all -n 2048-game
-
-#清除资源
-kubectl delete -f 2048/
-kubectl delete namespace 2048-game
 ```
 

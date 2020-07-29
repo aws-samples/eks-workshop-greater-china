@@ -12,12 +12,12 @@
 # 请检查IAM OpenID Connect (OIDC) 身份提供商是否已经创建
 aws eks describe-cluster --name ${CLUSTER_NAME} --query cluster.identity.oidc.issuer --output text
 # 如果上述命令无输出，请执行以下命令创建OpenID Connect (OIDC) 身份提供商
-eksctl utils associate-iam-oidc-provider --cluster=${CLUSTER_NAME} --approve --region ${AWS_REGION}
+#eksctl utils associate-iam-oidc-provider --cluster=${CLUSTER_NAME} --approve --region ${AWS_REGION}
 
 #创建serviceaccount s3-echoer with IAM role
 eksctl create iamserviceaccount --name s3-echoer --namespace default \
     --cluster ${CLUSTER_NAME} --attach-policy-arn arn:aws-cn:iam::aws:policy/AmazonS3FullAccess \
-    --approve --override-existing-serviceaccounts --region ${AWS_DEFAULT_REGION}
+    --approve --override-existing-serviceaccounts 
 
 ```
 
@@ -25,19 +25,17 @@ eksctl create iamserviceaccount --name s3-echoer --namespace default \
 *使用已有s3 bucket或创建s3 bucket, 请确保bucket名字唯一才能创建成功.
 
 ```bash
-git clone https://github.com/mhausenblas/s3-echoer.git && cd s3-echoer
-
 # 设置环境变量TARGET_BUCKET,Pod访问的S3 bucket
 TARGET_BUCKET=eksworkshop-irsa-2020
 if [ $(aws s3 ls | grep $TARGET_BUCKET | wc -l) -eq 0 ]; then
-    aws s3api create-bucket  --bucket $TARGET_BUCKET  --region $AWS_DEFAULT_REGION
+    aws s3api create-bucket  --bucket $TARGET_BUCKET   --create-bucket-configuration LocationConstraint=$AWS_DEFAULT_REGION  --region $AWS_DEFAULT_REGION
 else
     echo "S3 bucket $TARGET_BUCKET existed, skip creation"
 fi
 
 # 修改Region,部署Job
-sed -e "s/TARGET_BUCKET/${TARGET_BUCKET}/g;s/us-west-2/${AWS_DEFAULT_REGION}/g" s3-echoer-job.yaml.template > s3-echoer-job.yaml
-kubectl apply -f s3-echoer-job.yaml
+sed -e "s/TARGET_BUCKET/${TARGET_BUCKET}/g;s/us-west-2/${AWS_DEFAULT_REGION}/g" s3-echoer/s3-echoer-job.yaml.template > s3-echoer/s3-echoer-job.yaml
+kubectl apply -f s3-echoer/s3-echoer-job.yaml
 
 # 验证
 kubectl get job/s3-echoer
@@ -58,7 +56,8 @@ aws s3api list-objects --bucket $TARGET_BUCKET --query 'Contents[].{Key: Key, Si
 kubectl delete job/s3-echoer
 ```
 
-7.3 部署第二个IAM 权限测试Pod
+7.3 部署第二个IAM 权限测试Pod(可选)
+
 ```bash
 cd china/2020_EKS_Launch_Workshop/resource/
 

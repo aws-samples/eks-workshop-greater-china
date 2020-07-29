@@ -6,13 +6,18 @@ AWS Cloud9 为您提供了EC2基础设施资源并且一个可视化的编辑器
 
 1.1 通过浏览器进入 https://dashboard.eventengine.run/ ,填入12位hash code
 
+<img src="/Users/wsuam/Library/Application Support/typora-user-images/image-20200729204214972.png" alt="image-20200729204214972" style="zoom:33%;" />
 
 
-通过eventengine 进入aws 控制台
+
+通过点击AWS Console , Open AWS Console 进入aws 控制台
+
+![image-20200729204258710](/Users/wsuam/Library/Application Support/typora-user-images/image-20200729204258710.png)
 
 1.2 打开AWS管理控制台，在Service菜单栏中输入关键字Cloud9，进入Cloud9 管理页面
+![](media/15764751257913/15764752078709.jpg?raw=true")
 
-  ![](media/15764751257913/15764752078709.jpg)
+
 
 1.3 点击Create environment,在Environment name and Description内输入 环境的名称 [username]_cloud9，点击 Next Step。
 ![](media/15764751257913/15764752501954.jpg)
@@ -26,6 +31,8 @@ AWS Cloud9 为您提供了EC2基础设施资源并且一个可视化的编辑器
 
 
 **样式**默认是深色,可以修改为白色
+
+![image-20200729211802528](/Users/wsuam/Library/Application Support/typora-user-images/image-20200729211802528.png)
 
 1.6	Cloud9 通常使用动态生成 IAM 的认证授权信息，但目前和 EKS IAM Authentication 不兼容，因此我们直接给 Cloud 9 EC2 实例附加一个管理员权限的 IAM 角色，并禁止掉 Cloud9 默认的动态 IAM认证授权信息：
 
@@ -51,8 +58,11 @@ AWS Cloud9 为您提供了EC2基础设施资源并且一个可视化的编辑器
 
 ![](media/15764751257913/15764754031465.png)
 
-* 3）	关闭cloud9临时权限，并验证角色是否生效.
-![](media/15764751257913/15765030614319.png)
+* 3）	关闭cloud9临时权限，并验证角色是否生效
+
+>点击AWS Cloud9图标 -> Preferences - >AWS Settings ->关闭临时权限
+
+* ![](media/15764751257913/15765030614319.png)
 
 输入:
 
