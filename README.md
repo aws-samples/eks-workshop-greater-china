@@ -25,7 +25,29 @@ AWS GCR 2020 EKS Launch Hands-on Workshop
 #### Global Region
 ***
 
+AWS GCR 2020 ShenZhen Container Day
+
+- 步骤1 , 通过Cloud9搭建准备实验环境
+
+- 步骤2,  安装eksctl, kubectl , jq等工具
+
+- 步骤3,  创建EKS集群
+
+- 步骤4, 使用ALB Ingress
+
+- 步骤5,使用Kubernetes Dashboard
+
+- 步骤6,使用EBS存储
+
+- 步骤7, IRSA(可选)
+
+- 步骤8, 实现应用Pod和集群进行自动扩展（可选)
+
+  
+
+
 AWS GCR 2019 EKS New Feature Workshop 
+
 -   [介绍](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/global/2019_GCR_EKS_Workshop/README.md)
 -   [步骤1: 通过AWSCloud9搭建服务器环境](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/global/2019_GCR_EKS_Workshop/%E6%AD%A5%E9%AA%A41-%E9%80%9A%E8%BF%87AWS%20Cloud9%E6%90%AD%E5%BB%BA%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%8E%AF%E5%A2%83.md)
 -   [步骤2: 设置默认region, 安装eksctl,kubectl工具](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/global/2019_GCR_EKS_Workshop/%E6%AD%A5%E9%AA%A42-%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4region%2C%20%E5%AE%89%E8%A3%85eksctl%2C%20kubectl%E5%B7%A5%E5%85%B7.md)
