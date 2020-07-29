@@ -1,0 +1,11 @@
+sudo: false
+
+language: go
+
+go:
+- "1.10"
+
+script:
+  - make lint
+  - make
+  - make test-unit
