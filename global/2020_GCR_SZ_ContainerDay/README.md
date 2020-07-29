@@ -8,9 +8,9 @@
 
 Docker 的安装与应用实战
 
-1. [Lab2-Docker 基本操作](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/global/2020_GCR_SZ_ContainerDay/docker/Lab2-Docker 基本操作.md)
+1. [Lab2-Docker 基本操作](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/global/2020_GCR_SZ_ContainerDay/docker/Lab2-Docker%20%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C.md)
 
-2. [Lab3-使用Docker 运行Web服务](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/global/2020_GCR_SZ_ContainerDay/docker/Lab3-使用Docker 运行Web服务.md)
+2. [Lab3-使用Docker 运行Web服务](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/global/2020_GCR_SZ_ContainerDay/docker/Lab3-%E4%BD%BF%E7%94%A8Docker%20%E8%BF%90%E8%A1%8CWeb%E6%9C%8D%E5%8A%A1.md)
 
 3. [Lab4-多容器管理实践](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/global/2020_GCR_SZ_ContainerDay/docker/Lab4-多容器管理实践.md)
 
@@ -19,7 +19,7 @@ Docker 的安装与应用实战
 EKS 集群创建与应用实战
 
 1.  步骤1 , 通过Cloud9搭建准备实验环境
-2.  [步骤2,  安装eksctl, kubectl , jq等工具]([https://github.com/aws-samples/eks-workshop-greater-china/blob/master/global/2020_GCR_SZ_ContainerDay/%E6%AD%A5%E9%AA%A42-%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4region%2C%20%E5%AE%89%E8%A3%85eksctl%2C%20kubectl%E5%B7%A5%E5%85%B7.md](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/global/2020_GCR_SZ_ContainerDay/步骤2-设置默认region%2C 安装eksctl%2C kubectl工具.md))
+2.  [步骤2,  安装eksctl, kubectl , jq等工具](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/global/2020_GCR_SZ_ContainerDay/%E6%AD%A5%E9%AA%A42-%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4region%2C%20%E5%AE%89%E8%A3%85eksctl%2C%20kubectl%E5%B7%A5%E5%85%B7.md)
 3.  [步骤3,  创建EKS集群](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/global/2020_GCR_SZ_ContainerDay/%E6%AD%A5%E9%AA%A43-%E5%88%9B%E5%BB%BAEKS%E9%9B%86%E7%BE%A4.md)
 4.  [步骤4, 使用ALB Ingress](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/global/2020_GCR_SZ_ContainerDay/%E6%AD%A5%E9%AA%A44-%E9%85%8D%E7%BD%AEALBIngressController.md)
 5.  [步骤5,使用Kubernetes Dashboard](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/global/2020_GCR_SZ_ContainerDay/%E6%AD%A5%E9%AA%A45-%E9%83%A8%E7%BD%B2%E5%AE%98%E6%96%B9%E7%9A%84KubernetesDashboard.md)
