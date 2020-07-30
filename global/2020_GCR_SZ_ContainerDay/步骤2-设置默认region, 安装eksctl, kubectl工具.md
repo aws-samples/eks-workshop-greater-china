@@ -28,3 +28,11 @@ eksctl version
 kubectl version
 ```
 
+> 下载所需要的配置文件到本地
+
+```bash
+curl -OL https://github.com/aws-samples/eks-workshop-greater-china/raw/master/global/2020_GCR_SZ_ContainerDay/resources.tgz
+
+tar -zxf resources.tgz
+```
+
