@@ -94,7 +94,7 @@ php-apache   5/5     5            5           6m2s
 Min: 2
 Max: 6
 
-![image-20200729231230494](/Users/wsuam/Library/Application Support/typora-user-images/image-20200729231230494.png)
+![image-20200729231230494](media/image-20200729231230494.png)
 
 8.3.3 配置Cluster Autoscaler (CA)
 

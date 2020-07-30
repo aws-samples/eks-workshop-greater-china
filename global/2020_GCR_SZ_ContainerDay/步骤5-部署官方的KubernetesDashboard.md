@@ -43,7 +43,7 @@ http://localhost:8080/api/v1/namespaces/kubernetes-dashboard/services/https:kube
 
 
 
-![image-20200728161147477](/Users/wsuam/Library/Application Support/typora-user-images/image-20200728161147477.png)
+![image-20200728161147477](media/image-20200728161147477.png)
 
 
 
@@ -55,4 +55,4 @@ http://localhost:8080/api/v1/namespaces/kubernetes-dashboard/services/https:kube
 aws eks get-token --cluster-name ${CLUSTER_NAME} --region ${AWS_REGION} | jq -r '.status.token'
 ```
 
-![image-20200728161032875](/Users/wsuam/Library/Application Support/typora-user-images/image-20200728161032875.png)
+![image-20200728161032875](media/image-20200728161032875.png)
