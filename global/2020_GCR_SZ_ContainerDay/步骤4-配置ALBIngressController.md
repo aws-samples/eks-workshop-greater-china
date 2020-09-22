@@ -121,6 +121,6 @@ kubectl logs -n kube-system $(kubectl get po -n kube-system | egrep -o alb-ingre
 
 > 4.4.3 清理测试应用
 ```bash
-kubectl delete -f nginx-alb-ingress.yaml
+kubectl delete -f alb-ingress-controller/nginx-alb-ingress.yaml
 ```
 
