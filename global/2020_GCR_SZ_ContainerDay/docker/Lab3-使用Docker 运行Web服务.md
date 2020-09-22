@@ -5,12 +5,14 @@
 
 接下来的实验我们需要构建一个网站，所以我们需要提前开放实例的安全组端口。
 
-- 首先我们需要构建一个额外的安全组开放TCP流量。在运行这个命令前，我们需要提前获取到我们Cloud9实例的vpc-id。该vpc-id可以在EC页面下获取
+- 首先我们需要构建一个额外的安全组开放TCP流量。在运行这个命令前，我们需要提前获取到我们Cloud9实例的vpc-id。该vpc-id可以在EC2页面点击Cloud9 实例获取
 
-	![VPC-ID](media/15764751257913/15764752078709.jpg)
+	
 
+	![image-20200922131439749](../media/image-20200922131439749.png)
+	
 	```
-	admin:~/environment/github/docker-workshop/static-site (master) $ aws ec2 create-security-group --description allow-web-traffic --group-name allow-web-traffic --vpc-id vpc-0a122ceb83e361a52
+	$ aws ec2 create-security-group --description allow-web-traffic --group-name allow-web-traffic --vpc-id <vpc-id>
 	{
 	    "GroupId": "sg-03a4bafaf94c45139"
 	}
@@ -20,20 +22,22 @@
 
 	```
 	aws ec2 authorize-security-group-ingress \
-	    --group-id sg-03a4bafaf94c45139 \
+	    --group-id <安全组id> \
 	    --ip-permissions IpProtocol=tcp,FromPort=0,ToPort=65535,IpRanges='[{CidrIp=0.0.0.0/0}]'
 	```
 	
 - 绑定安全组到我们的Cloud9实例
 
-	![Attach-SG](media/15764751257913/15764752078709.jpg)
+	![image-20200922131948815](../media/image-20200922131948815.png)
+
+ ![image-20200922132023661](../media/image-20200922132023661.png)
 
 ## 开始构建Docker Web应用
 
 我们将使用的镜像是一个单页面的网站，本次实验已经将其托管在Docker Hub中nikosheng/static-site。我们可以使用docker run直接下载并运行镜像。如上所述，-rm标志在容器退出时自动删除。
 
 ```
-admin:~/environment/github/docker-workshop/static-site (master) $ docker run -d -P --rm --name static-site nikosheng/static-site
+$ docker run -d -P --rm --name static-site nikosheng/static-site
 1545b3eb32d9e02a864b21248bd7631e016c8c4de3ec16888940ff5fc6ea9372
 ```
 在上面的命令中，`-d`表示容器在后端运行，`-P`将所有公开的端口发布到随机端口，最后`--name`对应于我们要提供的名称。现在我们可以通过运行`docker port [CONTAINER]`命令来查看端口
@@ -65,7 +69,7 @@ docker stop static-site
 首先我们需要通过Git 下载本次实验的代码
 
 ```
-git clone https://github.com/nikosheng/docker-workshop.git
+git clone https://github.com/stevensu1977/docker-workshop.git
 
 cd docker-workshop/1-basic/flask-app
 ```
