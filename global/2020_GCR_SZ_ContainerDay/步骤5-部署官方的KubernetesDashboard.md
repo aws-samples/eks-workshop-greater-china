@@ -8,8 +8,8 @@
 #部署
 kubectl apply -f dashboard/recommended.yaml
 
-kubectl get pods -n kube-system
-kubectl get services -n kube-system
+kubectl get pods -n kubernetes-dashboard
+kubectl get services -n kubernetes-dashboard
 
 
 
