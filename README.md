@@ -25,7 +25,9 @@ AWS GCR 2020 EKS Launch Hands-on Workshop
 #### Global Region
 ***
 
-AWS GCR 2020 ShenZhen Container Day
+AWS GCR 2020  Container Day
+
+[实验文档](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/global/2020_GCR_SZ_ContainerDay/README.md)
 
 - 步骤1 , 通过Cloud9搭建准备实验环境
 
