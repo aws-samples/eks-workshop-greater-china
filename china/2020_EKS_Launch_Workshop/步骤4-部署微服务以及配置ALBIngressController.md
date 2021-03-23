@@ -103,10 +103,14 @@ eksctl utils associate-iam-oidc-provider --cluster=${CLUSTER_NAME} --approve --r
 
 > 4.2.1.2 创建所需要的IAM policy
 [https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.5/docs/examples/iam-policy.json](https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.5/docs/examples/iam-policy.json)
+```bash
+curl https://raw.githubusercontent.com/kubernetes-sigs/aws-alb-ingress-controller/v1.1.5/docs/examples/iam-policy.json > ingress-iam-policy.json
+```
  * 请注意官方的policy里面包含了WAF等服务，中国区没有所以需要手动删除,修改好的已经放在resource/alb-ingress-controller目录下
 
 ```bash
 cd china/2020_EKS_Launch_Workshop
+# file://路径/ingress-iam-policy.json
 aws iam create-policy --policy-name ALBIngressControllerIAMPolicy \
   --policy-document file://./alb-ingress-controller/ingress-iam-policy.json --region ${AWS_REGION}
 
