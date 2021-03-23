@@ -110,7 +110,7 @@ kubectl delete -f nginx-nlb.yaml
 > 我们之前通过eksctl创建了一个2节点的集群，下面我们来扩展集群节点到3
 ```bash
 NODE_GROUP=$(eksctl get nodegroup --cluster ${CLUSTER_NAME} --region=${AWS_REGION} -o json | jq -r '.[].Name')
-eksctl scale nodegroup --cluster=${CLUSTER_NAME} --nodes=3 --name=${NODE_GROUP} --region=${AWS_REGION}
+eksctl scale nodegroup --cluster=${CLUSTER_NAME} --nodes=3 --name=${NODE_GROUP} --region=${AWS_REGION} --nodes-max=3
 ```
 > 检查结果
 ```bash
