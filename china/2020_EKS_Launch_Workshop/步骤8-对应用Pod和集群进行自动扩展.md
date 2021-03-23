@@ -127,7 +127,36 @@ kubectl logs -f deployment/cluster-autoscaler -n kube-system
 
 8.2.4 Scale cluster
 ```bash
+# 准备nginx-to-scaleout.yaml
+cat <<EoF> nginx-to-scaleout.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-to-scaleout
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        service: nginx
+        app: nginx
+    spec:
+      containers:
+      - image: nginx
+        name: nginx-to-scaleout
+        resources:
+          limits:
+            cpu: 500m
+            memory: 512Mi
+          requests:
+            cpu: 500m
+            memory: 512Mi
+EoF
 
+# 部署
 kubectl apply -f cluster-autoscaler/nginx-to-scaleout.yaml
 kubectl get deployment/nginx-to-scaleout
 NAME                READY   UP-TO-DATE   AVAILABLE   AGE
