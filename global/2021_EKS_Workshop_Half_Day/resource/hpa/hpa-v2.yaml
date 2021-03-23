@@ -1,0 +1,82 @@
+apiVersion: v1
+items:
+- apiVersion: autoscaling/v2beta2
+  kind: HorizontalPodAutoscaler
+  metadata:
+    creationTimestamp: "2020-03-06T13:47:52Z"
+    name: php-apache
+    namespace: default
+    resourceVersion: "582901"
+    selfLink: /apis/autoscaling/v2beta2/namespaces/default/horizontalpodautoscalers/php-apache
+    uid: 13758845-5fb1-11ea-ab77-02aadf7bd768
+  spec:
+    maxReplicas: 5
+    minReplicas: 1
+    metrics:
+    # - resource:
+    #     name: cpu
+    #     target:
+    #       averageUtilization: 30
+    #       type: Utilization
+    #   type: Resource
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 50
+    - type: Pods
+      pods:
+        metric:
+          name: packets-per-second
+        target:
+          type: AverageValue
+          averageValue: 1k
+    - type: Object
+      object:
+        metric:
+          name: requests-per-second
+        describedObject:
+          apiVersion: networking.k8s.io/v1beta1
+          kind: Ingress
+          name: main-route
+        target:
+          type: Value
+          value: 10k
+    scaleTargetRef:
+      apiVersion: extensions/v1beta1
+      kind: Deployment
+      name: php-apache
+  status:
+    conditions:
+    - lastTransitionTime: "2020-03-06T13:48:08Z"
+      message: recommended size matches current size
+      reason: ReadyForNewScale
+      status: "True"
+      type: AbleToScale
+    - lastTransitionTime: "2020-03-06T13:48:08Z"
+      message: the HPA was able to successfully calculate a replica count from cpu
+        resource utilization (percentage of request)
+      reason: ValidMetricFound
+      status: "True"
+      type: ScalingActive
+    - lastTransitionTime: "2020-03-06T14:03:48Z"
+      message: the desired replica count is increasing faster than the maximum scale
+        rate
+      reason: TooFewReplicas
+      status: "True"
+      type: ScalingLimited
+    currentMetrics:
+    - resource:
+        current:
+          averageUtilization: 0
+          averageValue: 1m
+        name: cpu
+      type: Resource
+    currentReplicas: 1
+    desiredReplicas: 1
+    lastScaleTime: "2020-03-06T14:03:48Z"
+kind: List
+metadata:
+  resourceVersion: ""
+  selfLink: ""
