@@ -66,7 +66,8 @@ php-apache   5/5     5            5           6m2s
 5.2.1 配置Cluster Autoscaler (CA)
 ```bash
 mkdir cluster-autoscaler && cd cluster-autoscaler
-wget https://eksworkshop.com/beginner/080_scaling/deploy_ca.files/cluster_autoscaler.yml
+wget https://www.eksworkshop.com/beginner/080_scaling/deploy_ca.files/cluster-autoscaler-autodiscover.yaml
+cp cluster-autoscaler-autodiscover.yaml cluster_autoscaler.yml  
 
 K8S_VERSION=$(kubectl version --short | grep 'Server Version:' | sed 's/[^0-9.]*\([0-9.]*\).*/\1/' | cut -d. -f1,2)
 
@@ -93,7 +94,7 @@ echo $STACK_NAME
 ROLE_NAME=$(aws cloudformation describe-stack-resources --stack-name $STACK_NAME --region=${AWS_REGION} | jq -r '.StackResources[] | select(.ResourceType=="AWS::IAM::Role") | .PhysicalResourceId')
 echo $ROLE_NAME
 
-cat <<EoF > ~/environment/cluster-autoscaler/k8s-asg-policy.json
+cat <<EoF > k8s-asg-policy.json
 {
     "Version": "2012-10-17",
     "Statement": [
@@ -114,7 +115,7 @@ cat <<EoF > ~/environment/cluster-autoscaler/k8s-asg-policy.json
 }
 EoF
 
-aws iam put-role-policy --role-name $ROLE_NAME --policy-name ASG-Policy-For-Worker --policy-document file://./cluster-autoscaler/k8s-asg-policy.json --region ${AWS_REGION}
+aws iam put-role-policy --role-name $ROLE_NAME --policy-name ASG-Policy-For-Worker --policy-document file://k8s-asg-policy.json --region ${AWS_REGION}
 
 aws iam get-role-policy --role-name $ROLE_NAME --policy-name ASG-Policy-For-Worker --region ${AWS_REGION}
 
@@ -159,7 +160,7 @@ spec:
 EoF
 
 # 部署
-kubectl apply -f cluster-autoscaler/nginx-to-scaleout.yaml
+kubectl apply -f nginx-to-scaleout.yaml
 kubectl get deployment/nginx-to-scaleout
 NAME                READY   UP-TO-DATE   AVAILABLE   AGE
 nginx-to-scaleout   1/1     1            1           43s
