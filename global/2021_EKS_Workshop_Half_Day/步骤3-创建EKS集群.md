@@ -7,6 +7,7 @@
  echo "export CLUSTER_NAME=${CLUSTER_NAME}" >> ~/.bashrc
  eksctl create cluster \
        --name $CLUSTER_NAME \
+       --node-type t3.large \
        --managed
  ```
 
