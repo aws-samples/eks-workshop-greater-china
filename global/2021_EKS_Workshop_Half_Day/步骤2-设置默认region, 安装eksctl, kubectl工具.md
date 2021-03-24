@@ -6,6 +6,9 @@
 #设置默认region
 export AWS_DEFAULT_REGION=us-east-1
 echo "export AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}" >> ~/.bashrc
+export AWS_REGION=us-east-1
+echo "export AWS_REGION=${AWS_REGION}" >> ~/.bashrc
+
 
 #eksctl
 curl -L "https://github.com/weaveworks/eksctl/releases/download/0.41.0/eksctl_Linux_amd64.tar.gz" | tar xz -C .
