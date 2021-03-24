@@ -5,6 +5,7 @@
 ```bash
 #设置默认region
 export AWS_DEFAULT_REGION=us-east-1
+export AWS_REGION=us-east-1
 echo "export AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}" >> ~/.bashrc
 export AWS_REGION=us-east-1
 echo "export AWS_REGION=${AWS_REGION}" >> ~/.bashrc
