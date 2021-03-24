@@ -52,7 +52,7 @@ AWS Cloud9 为您提供了EC2基础设施资源并且一个可视化的编辑器
 
 ![](media/15764751257913/15764753507358.png)
 
-* 2）	在EC2 Instances界面选择cloud9的EC2实例(名字为aws-cloud9-xxxxx),点击Actions/Instance Settings/Attach/Replace IAM Role,为该实例设置正确的角色
+* 2）	在EC2 Instances界面选择cloud9的EC2实例(名字为aws-cloud9-xxxxx),点击Actions/Security/Modify IAM Role,为该实例设置正确的角色
 
   ![](media/15764751257913/1576503061.png)
   
