@@ -67,7 +67,20 @@ php-apache   5/5     5            5           6m2s
 ```bash
 mkdir cluster-autoscaler && cd cluster-autoscaler
 wget https://www.eksworkshop.com/beginner/080_scaling/deploy_ca.files/cluster-autoscaler-autodiscover.yaml
-cp cluster-autoscaler-autodiscover.yaml cluster_autoscaler.yml  
+cp cluster-autoscaler-autodiscover.yaml cluster_autoscaler.yml
+#修改cluster_autoscaler.yml，更改node-group-auto-discovery设置如下
+    spec:
+      containers:
+      - command:
+        - ./cluster-autoscaler
+        - --v=4
+        - --stderrthreshold=info
+        - --cloud-provider=aws
+        - --skip-nodes-with-local-storage=false
+        - --expander=least-waste
+        - --node-group-auto-discovery=asg:tag=k8s.io/cluster-autoscaler/enabled,k8s.io/cluster-autoscaler/**<YOUR CLUSTER NAME>**
+        - --balance-similar-node-groups
+        - --skip-nodes-with-system-pods=false
 
 K8S_VERSION=$(kubectl version --short | grep 'Server Version:' | sed 's/[^0-9.]*\([0-9.]*\).*/\1/' | cut -d. -f1,2)
 
@@ -115,16 +128,72 @@ cat <<EoF > k8s-asg-policy.json
 }
 EoF
 
-aws iam put-role-policy --role-name $ROLE_NAME --policy-name ASG-Policy-For-Worker --policy-document file://k8s-asg-policy.json --region ${AWS_REGION}
+aws iam create-policy \
+    --policy-name AmazonEKSClusterAutoscalerPolicy \
+    --policy-document file://k8s-asg-policy.json
+#输出如下
+#{
+#    "Policy": {
+#        "PolicyName": "EKSWorkshopClusterAutoscalerPolicy", 
+#        "PermissionsBoundaryUsageCount": 0, 
+#        "CreateDate": "2021-04-09T07:48:17Z", 
+#        "AttachmentCount": 0, 
+#        "IsAttachable": true, 
+#        "PolicyId": "ANPAWWST7VJD7IL7AW6KQ", 
+#        "DefaultVersionId": "v1", 
+#        "Path": "/", 
+#        "Arn": "**arn:aws:iam::460811381319:policy/EKSWorkshopClusterAutoscalerPolicy**", 
+#        "UpdateDate": "2021-04-09T07:48:17Z"
+#    }
+#}
+#记录返回policy arn
 
-aws iam get-role-policy --role-name $ROLE_NAME --policy-name ASG-Policy-For-Worker --region ${AWS_REGION}
+#创建oidc provider
+#检查是否已有oidc provider
+aws eks describe-cluster --name <<your-cluster-name>> --query "cluster.identity.oidc.issuer" --output text
+
+#示例输出
+https://oidc.eks.ap-southeast-1.amazonaws.com/id/**6E43BAED01EC5C242B8A6C49B9C75BD4**
+
+#查询oidc
+aws iam list-open-id-connect-providers | grep 6E43BAED01EC5C242B8A6C49B9C75BD4
+
+#如果输出为空，则需要执行下面命令（每个集群仅需要执行一次）：
+eksctl utils associate-iam-oidc-provider --cluster <<your-cluster-name>> --approve
+
+#示例输入如下
+#2021-04-09 07:51:44 [ℹ]  eksctl version 0.41.0
+#2021-04-09 07:51:44 [ℹ]  using region ap-southeast-1
+#2021-04-09 07:51:45 [ℹ]  will create IAM Open ID Connect provider for cluster "eksworkshop" in "ap-southeast-1"
+#2021-04-09 07:51:45 [✔]  created IAM Open ID Connect provider for cluster "eksworkshop" in "ap-southeast-1"
+
+#创建cluster autoscaler service account， 此处policy-arn为使用k8s-asg-policy.json创建的policy arn
+eksctl create iamserviceaccount \
+  --cluster=eksworkshop \
+  --namespace=kube-system \
+  --name=cluster-autoscaler \
+  --attach-policy-arn=**arn:aws:iam::460811381319:policy/EKSWorkshopClusterAutoscalerPolicy** \
+  --override-existing-serviceaccounts \
+  --approve
+
+#示例输出
+#2021-04-09 07:52:02 [ℹ]  eksctl version 0.41.0
+#2021-04-09 07:52:02 [ℹ]  using region ap-southeast-1
+#2021-04-09 07:52:03 [ℹ]  1 iamserviceaccount (kube-system/cluster-autoscaler) was included (based on the include/exclude rules)
+#2021-04-09 07:52:03 [!]  metadata of serviceaccounts that exist in Kubernetes will be updated, as --override-existing-serviceaccounts was set
+#2021-04-09 07:52:03 [ℹ]  1 task: { 2 sequential sub-tasks: { create IAM role for serviceaccount "kube-system/cluster-autoscaler", create serviceaccount "kube-#system/cluster-autoscaler" } }
+#2021-04-09 07:52:03 [ℹ]  building iamserviceaccount stack "eksctl-eksworkshop-addon-iamserviceaccount-kube-system-cluster-autoscaler"
+#2021-04-09 07:52:04 [ℹ]  deploying stack "eksctl-eksworkshop-addon-iamserviceaccount-kube-system-cluster-autoscaler"
+#2021-04-09 07:52:04 [ℹ]  waiting for CloudFormation stack "eksctl-eksworkshop-addon-iamserviceaccount-kube-system-cluster-autoscaler"
+#2021-04-09 07:52:20 [ℹ]  waiting for CloudFormation stack "eksctl-eksworkshop-addon-iamserviceaccount-kube-system-cluster-autoscaler"
+#2021-04-09 07:52:37 [ℹ]  waiting for CloudFormation stack "eksctl-eksworkshop-addon-iamserviceaccount-kube-system-cluster-autoscaler"
+#2021-04-09 07:52:38 [ℹ]  created serviceaccount "kube-system/cluster-autoscaler"
 
 # Deploy CA
 kubectl apply -f cluster-autoscaler/cluster_autoscaler.yml
 kubectl get pod -n kube-system -o wide \
     $(kubectl get po -n kube-system | egrep -o cluster-autoscaler[a-zA-Z0-9-]+)
 kubectl logs -f deployment/cluster-autoscaler -n kube-system
-
 
 ```
 
