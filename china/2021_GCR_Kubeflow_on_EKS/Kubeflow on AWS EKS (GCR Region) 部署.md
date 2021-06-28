@@ -72,7 +72,7 @@ kubectl get node
 #步骤1 安装 mutating-webhook
 kubectl apply -f resource/mutating-webhook.yaml
 
-#验证是否生效
+#步骤2 验证是否生效
 kubectl run test --image=k8s.gcr.io/coredns:1.3.1
 kubectl get pod test -o=jsonpath='{.spec.containers[0].image}'
 #如果显示 048912060910.dkr.ecr.cn-northwest-1.amazonaws.com.cn/gcr/google_containers/coredns:1.3.1 表示mutating-webhook 工作正常
@@ -127,8 +127,7 @@ eksctl create iamserviceaccount \
        --approve
        
 
-#4.3 更新configmap,并重启ALB Ingress Controller
-kubectl apply -f resource/aws-alb-config-map.yaml
+#4.3 并重启ALB Ingress Controller
 kubectl rollout restart deployment alb-ingress-controller -n kubeflow
 
 #5. 获取kubeflow URL
@@ -148,6 +147,7 @@ kubectl get ingress -n istio-system
 # 这里的默认密码是abcd1234
 
 # 修改后dex-config.yaml提交
+cd resource
 kubectl create configmap dex --from-file=config.yaml=dex-config.yaml -n auth --dry-run -oyaml | kubectl apply -f -
 
 # 重启dex应用
@@ -166,20 +166,16 @@ kubectl apply -f app1.yaml
 
 
 
-### 6. 配置用户权限
+### 6. 配置用户权限(可选)
 
 * IAM 创建policy 限制s3访问
 
   ```bash
   export AWS_REGION=cn-northwest-1
-  export CLUSTER_NAME=<eksctl config里面集群的名字>
+  export CLUSTER_NAME=kubeflow-workshop
   
   aws iam create-policy --policy-name s3-kubeflow-on-eks-app1 \
     --policy-document file://./alb-ingress-controller/s3-kubeflow-on-eks-app1.json --region ${AWS_REGION}
-    
-    
-  aws iam create-policy --policy-name s3-kubeflow-on-eks-app2 \
-    --policy-document file://./alb-ingress-controller/s3-kubeflow-on-eks-app2.json --region ${AWS_REGION}
     
   ```
   
@@ -187,7 +183,7 @@ kubectl apply -f app1.yaml
 
   ```bash
   
-  #请重复为app1,app2 service account 设置IAM role
+  #请重复为app1的service account 设置IAM role
   POLICY_NAME=$(aws iam list-policies --query 'Policies[?PolicyName==`s3-kubeflow-on-eks-app1`].Arn' --output text --region ${AWS_REGION})
   
   eksctl create iamserviceaccount \
