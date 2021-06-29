@@ -5,7 +5,7 @@ metadata:
     kfctl.kubeflow.io/force-delete: "false"
   clusterName: kubeflow-workshop.cn-northwest-1.eksctl.io
   creationTimestamp: null
-  name: KUBEFLOW-WORKSHOP
+  name: kubeflow-workshop
   namespace: kubeflow
 spec:
   applications:
