@@ -1,0 +1,45 @@
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: kubeflow-workshop
+  region: cn-northwest-1
+  version: "1.18"
+
+
+nodeGroups:
+  - name: eks-prod-cpu-ng-1
+    instanceType: m5.2xlarge
+    desiredCapacity: 2
+    minSize: 1
+    maxSize: 3
+    volumeSize: 50
+    ssh:
+      allow: true 
+      publicKeyName: wsu-cn-northwest-1
+    iam:
+      withAddonPolicies:
+        autoScaler: true
+        ebs: true
+        efs: true
+        cloudWatch: true
+        albIngress: true
+
+
+  - name: eks-prod-gpu-ng-1
+    instanceType: g4dn.xlarge
+    desiredCapacity: 1
+    minSize: 1
+    maxSize: 1  
+    volumeSize: 100
+    ssh:
+      allow: true 
+      publicKeyName: wsu-cn-northwest-1
+    iam:
+      withAddonPolicies:
+        autoScaler: true
+        ebs: true
+        efs: true
+        cloudWatch: true
+        albIngress: true
+
