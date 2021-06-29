@@ -44,7 +44,7 @@ curl -o aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.18
 brew install jq
 #linux 
 #CentOS, Amaon Linux
-yum inistall jq
+yum install jq
 #ubuntu
 apt-get install jq
 
