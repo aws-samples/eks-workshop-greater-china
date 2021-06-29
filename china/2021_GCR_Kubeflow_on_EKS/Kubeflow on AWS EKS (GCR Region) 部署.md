@@ -18,6 +18,10 @@ curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.20.4/2021-04-12/
 curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.20.4/2021-04-12/bin/linux/amd64/kubectl
 
 
+#eksctl 0.54.0
+#macbook
+curl -OL https://github.com/weaveworks/eksctl/releases/download/0.54.0/eksctl_Darwin_amd64.tar.gz
+
 #kfctl v1.2.0-0-gbc038f9
 #macbook
 curl -OL https://github.com/kubeflow/kfctl/releases/download/v1.2.0/kfctl_v1.2.0-0-gbc038f9_darwin.tar.gz
@@ -171,11 +175,14 @@ kubectl apply -f app1.yaml
 * IAM 创建policy 限制s3访问
 
   ```bash
+  #s3-kubeflow-on-eks-app1.json 里面使用的s3 bucket 是kubeflow-on-eks-app1
+  #请自行修改
+  
   export AWS_REGION=cn-northwest-1
   export CLUSTER_NAME=kubeflow-workshop
   
   aws iam create-policy --policy-name s3-kubeflow-on-eks-app1 \
-    --policy-document file://./alb-ingress-controller/s3-kubeflow-on-eks-app1.json --region ${AWS_REGION}
+    --policy-document file://./resource/s3-kubeflow-on-eks-app1.json --region ${AWS_REGION}
     
   ```
   
