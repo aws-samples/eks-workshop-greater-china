@@ -11,7 +11,7 @@
 
 Lab1  Serverless
 
-1. [步骤1-从头开始写一个 serverless API](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/global/2021_GCR_MAD_Day/lab1-serverless/步骤1-从头开始写一个 serverless API.md)
+1. [步骤1-从头开始写一个 serverless API](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/global/2021_GCR_MAD_Day/lab2-eks/%E6%AD%A5%E9%AA%A41-%E8%AE%BE%E7%BD%AE%E9%BB%98%E8%AE%A4region%2C%20%E5%AE%89%E8%A3%85eksctl%2C%20kubectl%E5%B7%A5%E5%85%B7.md)
 
 2. [步骤2-使用serverless 快速构建Express应用](https://github.com/aws-samples/eks-workshop-greater-china/blob/master/global/2021_GCR_MAD_Day/lab1-serverless/%E6%AD%A5%E9%AA%A41-%E4%BD%BF%E7%94%A8serverless%20%E5%BF%AB%E9%80%9F%E6%9E%84%E5%BB%BAExpress%E5%BA%94%E7%94%A8.md)
 
