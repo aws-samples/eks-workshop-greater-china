@@ -4,7 +4,13 @@
 ## 步骤1: 通过AWS Cloud9搭建服务器环境
 AWS Cloud9 为您提供了EC2基础设施资源并且一个可视化的编辑器。在本次实验中，您将通过Cloud9去创建一台具有公网访问权限的EC2 实例，运行后续的实验。
 
-1.1 通过浏览器进入 https://dashboard.eventengine.run/ ,填入12位hash code
+1.1 通过浏览器进入 https://dashboard.eventengine.run/ ,填入12位hash code,然后选择 Email One-Time Password 输入邮件接收临时密码
+
+
+
+<img src="media/image-20210903140529220.png" alt="image-20210903140529220" style="zoom:50%;" />
+
+<img src="media/image-20210903140615953.png" alt="image-20210903140615953" style="zoom:50%;" />
 
 <img src="media/image-20200729204214972.png" alt="image-20200729204214972" style="zoom:33%;" />
 
