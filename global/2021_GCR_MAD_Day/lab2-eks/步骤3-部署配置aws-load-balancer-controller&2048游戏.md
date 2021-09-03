@@ -6,7 +6,7 @@
 
 ```bash
 export CLUSTER_NAME=eksworkshop
-export AWS_DEFAULT_REGION
+export AWS_DEFAULT_REGION=us-west-2
 eksctl utils associate-iam-oidc-provider \
     --cluster=$CLUSTER_NAME \
     --approve
