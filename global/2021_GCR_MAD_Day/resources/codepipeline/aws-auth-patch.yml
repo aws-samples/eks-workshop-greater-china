@@ -1,0 +1,19 @@
+apiVersion: v1
+data:
+  mapRoles: |
+    - rolearn: arn:aws:iam::596030579944:role/EksWorkshopCodeBuildKubectlRole
+      username: build
+      groups:
+        - system:masters
+    - groups:
+      - system:bootstrappers
+      - system:nodes
+      rolearn: arn:aws:iam::596030579944:role/eksctl-eksworkshop-nodegroup-ng-d-NodeInstanceRole-1751CIO1JW5MD
+      username: system:node:{{EC2PrivateDNSName}}
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2021-08-27T11:38:47Z"
+  name: aws-auth
+  namespace: kube-system
+  resourceVersion: "1417"
+  uid: b88a5d87-2be5-450d-9a0a-130280275f66
