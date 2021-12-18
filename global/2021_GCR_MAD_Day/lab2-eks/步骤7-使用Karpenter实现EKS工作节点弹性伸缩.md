@@ -241,7 +241,7 @@ kubectl scale deployment inflate --replicas 1
 
 Karpenter 会计算unschedulable的Pods然后扩展EC2，这里看见拉起的就是c5.2xlarge
 
-![image-20211217153812098](/Users/wsuam/Library/Application Support/typora-user-images/image-20211217153812098.png)
+![image-20211217153812098](../media/image-20211217153812098.png)
 
 > 收缩测试，当节点空闲时Karpenter controller向该节点发出TTL标志（ controller.node  Added TTL to empty node）时间到了就会终止该EC2节点
 
@@ -249,4 +249,4 @@ Karpenter 会计算unschedulable的Pods然后扩展EC2，这里看见拉起的�
  kubectl scale deployment inflate --replicas 0
 ```
 
-![image-20211217154353774](/Users/wsuam/Library/Application Support/typora-user-images/image-20211217154353774.png)
+![image-20211217154353774](../media/image-20211217154353774.png)
