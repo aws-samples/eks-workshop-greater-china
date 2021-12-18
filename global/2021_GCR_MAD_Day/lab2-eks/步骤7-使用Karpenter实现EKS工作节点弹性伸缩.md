@@ -227,9 +227,9 @@ watch -t -n 1 kubectl get pod
 kubectl scale deployment inflate --replicas 1
 ```
 
-![image-20211217153045284](/Users/wsuam/Library/Application Support/typora-user-images/image-20211217153045284.png)
+![image-20211217153045284](../media/image-20211217153045284.png)
 
-![image-20211217153123001](/Users/wsuam/Library/Application Support/typora-user-images/image-20211217153123001.png)
+![image-20211217153123001](../media/image-20211217153123001.png)
 
 > 将副本增加到10
 
@@ -237,7 +237,7 @@ kubectl scale deployment inflate --replicas 1
  kubectl scale deployment inflate --replicas 10
  ```
 
-![image-20211217153606747](/Users/wsuam/Library/Application Support/typora-user-images/image-20211217153606747.png)
+![image-20211217153606747](../media/image-20211217153606747.png)
 
 Karpenter 会计算unschedulable的Pods然后扩展EC2，这里看见拉起的就是c5.2xlarge
 
