@@ -15,7 +15,7 @@ eksctl utils associate-iam-oidc-provider \
 > 4.1.2 下载yaml文件
 
 ```bash
-curl -o iam-policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.2.1/docs/install/iam_policy.json
+curl -o iam-policy.json https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/v2.3.1/docs/install/iam_policy.json
 
 ```
 
@@ -91,9 +91,22 @@ metadata:
 ```
 
 > 4.2.4 安装 aws-load-balancer-controller
+>
+> 在新的版本里面 [kubernetes.io/ingress.class](http://kubernetes.io/ingress.class) annotation 会被遗弃掉, 1.18开始增加了ingressClassName ,然后在spec里面使用ingressClassName即可
 
 ```bash
 kubectl apply -f v2_2_1_full.yaml
+
+#创建IngressClass
+cat << EOF >> ingress_alb.yaml
+---
+apiVersion: networking.k8s.io/v1
+kind: IngressClass
+metadata:
+  name: alb
+spec:
+  controller: ingress.k8s.aws/alb
+EOF
 ```
 
 
@@ -104,10 +117,12 @@ kubectl apply -f v2_2_1_full.yaml
 
 ```bash
 #生成2048配置文件
-curl -s https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/main/docs/examples/2048/2048_full_latest.yaml \
-    | sed 's=alb.ingress.kubernetes.io/target-type: ip=alb.ingress.kubernetes.io/target-type: instance=g' > 2048_full_latest.yaml
+
+
+curl -s https://raw.githubusercontent.com/kubernetes-sigs/aws-load-balancer-controller/main/docs/examples/2048/2048_full.yaml \
+    | sed 's=alb.ingress.kubernetes.io/target-type: ip=alb.ingress.kubernetes.io/target-type: instance=g' > 2048_full.yaml
     
-kubectl apply -f 2048_full_latest.yaml
+kubectl apply -f 2048_full.yaml
 
 #查看ingress信息
 kubectl get ingress/ingress-2048 -n game-2048
