@@ -7,7 +7,7 @@
  echo "export CLUSTER_NAME=${CLUSTER_NAME}" >> ~/.bashrc
  eksctl create cluster \
        --name $CLUSTER_NAME \
-       --version 1.20 \
+       --version 1.21 \
        --managed
  ```
 
