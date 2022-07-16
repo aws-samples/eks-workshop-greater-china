@@ -8,6 +8,8 @@
 
 [Kubernetes 节点弹性伸缩开源组件 Karpenter 实践：使用 Spot 实例进行成本优化](https://aws.amazon.com/cn/blogs/china/kubernetes-node-elastic-scaling-open-source-component-karpenter-practice-cost-optimization-using-spot-instance/)
 
+[Unreal Engine 像素流送在g4dn上实现容器化部署实践(二)](https://aws.amazon.com/cn/blogs/china/practice-of-container-deployment-of-unreal-engine-pixel-streaming-on-g4dn-ii/)
+
 
 
 
