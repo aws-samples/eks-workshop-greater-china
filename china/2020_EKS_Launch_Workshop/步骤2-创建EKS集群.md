@@ -12,15 +12,14 @@
  #CLUSTER_NAME 集群名称
  #AWS_REGION cn-northwest-1：宁夏区； cn-north-1：北京区
 
- AWS_REGION=cn-northwest-1
- AWS_DEFAULT_REGION=cn-northwest-1
- CLUSTER_NAME=eksworkshop
+ export AWS_REGION=cn-northwest-1
+ export CLUSTER_NAME=eksworkshop
 
  #参数说明
  #--node-type 工作节点类型 默认为m5.large
  #--nodes 工作节点数量 默认为2
  
- eksctl create cluster --name=${CLUSTER_NAME} --node-type t3.medium --managed --alb-ingress-access --region=${AWS_REGION}
+eksctl create cluster --name=${CLUSTER_NAME} --node-type t3.medium --managed --alb-ingress-access --region=${AWS_REGION}
 
  ```
 
@@ -71,7 +70,18 @@ ip-192-168-40-132.cn-northwest-1.compute.internal   Ready    <none>   4d1h   v1.
 
  ```
 
+（可选）使用配置文件创建eksworkshop 集群
+
+```bash
+
+```
+
+
+
+
+
 （可选）配置环境变量用于后续使用
+
 ```bash
 STACK_NAME=$(eksctl get nodegroup --cluster ${CLUSTER_NAME} --region=${AWS_REGION} -o json | jq -r '.[].StackName')
 echo $STACK_NAME
