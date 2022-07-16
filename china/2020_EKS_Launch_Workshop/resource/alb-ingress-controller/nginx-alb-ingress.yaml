@@ -1,5 +1,5 @@
 ---
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-deployment-ingress
@@ -7,6 +7,9 @@ metadata:
     app: nginx
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app: nginx
   template:
     metadata:
       labels:
@@ -25,7 +28,8 @@ metadata:
 spec:
   selector:
     app: nginx
-  type: ClusterIP
+  #type: ClusterIP
+  type: NodePort
   ports:
   - protocol: TCP
     port: 80
@@ -39,7 +43,8 @@ metadata:
   annotations:
     kubernetes.io/ingress.class: alb
     alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
+    #alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/target-type: instance
   labels:
     app: nginx
 spec:
