@@ -85,7 +85,7 @@ AWS Cloud9 为您提供了EC2基础设施资源并且一个可视化的编辑器
 
 ```bash
 #设置默认region
-export AWS_DEFAULT_REGION=us-west-2
+export AWS_DEFAULT_REGION=us-east-1
 echo "export AWS_DEFAULT_REGION=${AWS_DEFAULT_REGION}" >> ~/.bashrc
 
 
@@ -98,7 +98,7 @@ aws sts get-caller-identity
 {
     "Account": "012345678911", 
     "UserId": "AROAYVRRQ4TUEIX4VRZLN:i-0e011f5bb16f38173", 
-    "Arn": "arn:aws:sts:: 012345678911:assumed-role/eksworkshop-admin/i-0e011f5bb16f38173"
+    "Arn": "arn:aws:sts::012345678911:assumed-role/eksworkshop-admin/i-0e011f5bb16f38173"
 }
 ```
 
