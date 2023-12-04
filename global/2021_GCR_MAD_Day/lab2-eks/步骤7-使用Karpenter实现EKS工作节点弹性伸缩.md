@@ -86,7 +86,7 @@ Karpenter 会自动发现含有 `kubernetes.io/cluster/$CLUSTER_NAME`标记的VP
 
    ```bash
    TEMPOUT=$(mktemp)
-   curl -fsSL https://karpenter.sh/docs/getting-started/cloudformation.yaml > $TEMPOUT \
+   curl -fsSL https://karpenter.sh/v0.5.2/getting-started/cloudformation.yaml > $TEMPOUT \
    && aws cloudformation deploy \
      --stack-name Karpenter-${CLUSTER_NAME} \
      --template-file ${TEMPOUT} \
